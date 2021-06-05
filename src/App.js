@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 
 import Home from "./components/home";
 import Info from "./components/infoForm";
 import Tasks from "./components/tasks";
 
+// screen 0 is inital info screen
+// screen 1 is homescreen
+// screen 2 is Task Select screen
+
 class App extends Component {
   state = {
-    page: "/info",
+    screen: 0,
     gotInfo: false,
     initInfo: { startWork: 0, isCommute: false, location: "" },
     selectedTasks: "",
@@ -17,7 +20,6 @@ class App extends Component {
   updateInfo = (when, commute, where) => {
     this.setState(
       {
-        page: "/",
         gotInfo: true,
         initInfo: { startWork: when, isCommute: commute, location: where },
       },
@@ -25,31 +27,26 @@ class App extends Component {
     );
   };
 
-  addTask = (task) => {
-    this.setState({ selectedTasks: [task] }, () => console.log(this.state));
+  updateScreen = (screenNum) => {
+    this.setState({ screen: screenNum });
   };
+
+  // addTask = (task) => {
+  //   this.setState({ selectedTasks: [task] }, () => console.log(this.state));
+  // };
 
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          {!this.state.gotInfo ? (
-            <Redirect from="/" to={this.state.page} />
-          ) : (
-            ""
-          )}
-          <Switch>
-            <Route exact path="/info">
-              <Info updateInfo={this.updateInfo} />
-            </Route>
-            <Route exact path="/tasks">
-              <Tasks addTask={this.addTask} />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        {this.state.screen === 0 ? (
+          <Info updateInfo={this.updateInfo} updateScreen={this.updateScreen} />
+        ) : this.state.screen === 1 ? (
+          <Home updateScreen={this.updateScreen} />
+        ) : this.state.screen === 2 ? (
+          <Tasks addTask={this.addTask} />
+        ) : (
+          "Error"
+        )}
       </div>
     );
   }

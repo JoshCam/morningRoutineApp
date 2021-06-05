@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class Info extends Component {
   state = { when: 0, commute: false, where: "" };
@@ -23,6 +22,15 @@ class Info extends Component {
       </div>
     );
   }
+
+  onClick = (screenNum) => {
+    this.props.updateScreen(screenNum);
+    this.props.updateInfo(
+      this.state.when,
+      this.state.commute,
+      this.state.where
+    );
+  };
 
   render() {
     return (
@@ -52,20 +60,9 @@ class Info extends Component {
           {/* Only display code if user commutes */}
           {this.outputHTML(this.state.commute)}
           <br></br>
-          <Link to="/">
-            <button
-              type="submit"
-              onClick={() =>
-                this.props.updateInfo(
-                  this.state.when,
-                  this.state.commute,
-                  this.state.where
-                )
-              }
-            >
-              Finished
-            </button>
-          </Link>
+          <button type="submit" onClick={() => this.onClick(1)}>
+            Finished
+          </button>
         </form>
       </div>
     );

@@ -9,7 +9,7 @@ class Tasks extends Component {
     return (
       <div>
         {this.state.task.map((task) => {
-          return <TaskCard task={task} addTask={this.props.addTask} />;
+          return <TaskCard task={task} />;
         })}
       </div>
     );
