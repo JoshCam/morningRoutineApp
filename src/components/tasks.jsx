@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import TaskCard from "./taskCard";
+import React from "react";
+import { useDispatch } from "react-redux";
+import TaskCard from "./TaskCard";
+import { updateScreen } from "../actions";
 
-class Tasks extends Component {
-  state = {
-    task: ["Wake Up", "Drink Water", "Make Bed", "Brush Teeth", "Shower"],
-  };
-  render() {
-    return (
-      <div>
-        {this.state.task.map((task) => {
-          return <TaskCard task={task} />;
-        })}
-      </div>
-    );
-  }
-}
+const Tasks = () => {
+  const tasks = ["Wake Up", "Drink Water", "Make Bed", "Brush Teeth", "Shower"];
+  const dispatch = useDispatch();
+  return (
+    <div className="App">
+      {tasks.map((task) => {
+        return <TaskCard task={task} />;
+      })}
+      <button onClick={() => dispatch(updateScreen(1))}>Done</button>
+    </div>
+  );
+};
 
 export default Tasks;

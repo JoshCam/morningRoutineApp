@@ -1,55 +1,38 @@
-import React, { Component } from "react";
 import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+// import { increment, decrement } from "./actions";
 
+// My Components
 import Home from "./components/home";
-import Info from "./components/infoForm";
+import Info from "./components/info";
 import Tasks from "./components/tasks";
 
 // screen 0 is inital info screen
 // screen 1 is homescreen
 // screen 2 is Task Select screen
 
-class App extends Component {
-  state = {
-    screen: 0,
-    gotInfo: false,
-    initInfo: { startWork: 0, isCommute: false, location: "" },
-    selectedTasks: "",
-  };
-
-  updateInfo = (when, commute, where) => {
-    this.setState(
-      {
-        gotInfo: true,
-        initInfo: { startWork: when, isCommute: commute, location: where },
-      },
-      () => console.log(this.state)
-    );
-  };
-
-  updateScreen = (screenNum) => {
-    this.setState({ screen: screenNum });
-  };
-
-  // addTask = (task) => {
-  //   this.setState({ selectedTasks: [task] }, () => console.log(this.state));
-  // };
-
-  render() {
-    return (
-      <div className="App">
-        {this.state.screen === 0 ? (
-          <Info updateInfo={this.updateInfo} updateScreen={this.updateScreen} />
-        ) : this.state.screen === 1 ? (
-          <Home updateScreen={this.updateScreen} />
-        ) : this.state.screen === 2 ? (
-          <Tasks addTask={this.addTask} />
-        ) : (
-          "Error"
-        )}
-      </div>
-    );
-  }
+function App() {
+  const count = useSelector((state) => state.count);
+  const screen = useSelector((state) => state.screen);
+  // const dispatch = useDispatch();
+  return (
+    <div className="App">
+      {screen === 0 ? (
+        <Info />
+      ) : screen === 1 ? (
+        <Home />
+      ) : screen === 2 ? (
+        <Tasks />
+      ) : (
+        "Error"
+      )}
+      {/* <br></br>
+      <hr></hr>
+      <p>The count is {count}</p>
+      <button onClick={() => dispatch(decrement(5))}>-</button>
+      <button onClick={() => dispatch(increment(5))}>+</button> */}
+    </div>
+  );
 }
 
 export default App;

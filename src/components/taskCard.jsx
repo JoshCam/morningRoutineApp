@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../actions";
 
-class TaskCard extends Component {
-  state = {};
-  render() {
-    return <div key={this.props.task}>{this.props.task}</div>;
-  }
-}
+const TaskCard = (props) => {
+  const dispatch = useDispatch();
+  return <h1 onClick={() => dispatch(addTask(props.task))}>{props.task}</h1>;
+};
 
 export default TaskCard;
-
-// onClick={this.props.addTask(this.props.task)}
