@@ -30,6 +30,12 @@ export const updateCoords = (info) => {
     payload: info,
   };
 };
+export const updateHomeCoords = (info) => {
+  return {
+    type: "GOT_HOME_COORDS",
+    payload: info,
+  };
+};
 
 export const addTask = (task) => {
   return {

@@ -3,6 +3,7 @@ let initialState = {
   commute: false,
   where: "",
   coords: {},
+  homeCoords: {},
 };
 
 const userInfo = (state = initialState, action) => {
@@ -26,6 +27,11 @@ const userInfo = (state = initialState, action) => {
       return {
         ...state,
         coords: action.payload,
+      };
+    case "GOT_HOME_COORDS":
+      return {
+        ...state,
+        homeCoords: action.payload,
       };
     default:
       return state;

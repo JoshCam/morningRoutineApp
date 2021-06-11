@@ -15,7 +15,7 @@ import {
 const Info = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
-  const where = useSelector((state) => state.userInfo.where);
+  // const where = useSelector((state) => state.userInfo.where);
   const dispatch = useDispatch();
 
   const [address, setAddress] = React.useState("");
