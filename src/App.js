@@ -1,5 +1,5 @@
 import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // import { increment, decrement } from "./actions";
 
 // My Components
@@ -12,9 +12,7 @@ import Tasks from "./components/tasks";
 // screen 2 is Task Select screen
 
 function App() {
-  const count = useSelector((state) => state.count);
   const screen = useSelector((state) => state.screen);
-  // const dispatch = useDispatch();
   return (
     <div className="App">
       {screen === 0 ? (
@@ -26,11 +24,6 @@ function App() {
       ) : (
         "Error"
       )}
-      {/* <br></br>
-      <hr></hr>
-      <p>The count is {count}</p>
-      <button onClick={() => dispatch(decrement(5))}>-</button>
-      <button onClick={() => dispatch(increment(5))}>+</button> */}
     </div>
   );
 }

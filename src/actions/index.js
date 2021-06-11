@@ -24,6 +24,13 @@ export const updateWhere = (info) => {
   };
 };
 
+export const updateCoords = (info) => {
+  return {
+    type: "GOT_COORDS",
+    payload: info,
+  };
+};
+
 export const addTask = (task) => {
   return {
     type: "ADD_TASK",

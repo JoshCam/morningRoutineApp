@@ -1,4 +1,9 @@
-let initialState = { when: 0, commute: false, where: "" };
+let initialState = {
+  when: "00:00",
+  commute: false,
+  where: "",
+  coords: {},
+};
 
 const userInfo = (state = initialState, action) => {
   switch (action.type) {
@@ -16,6 +21,11 @@ const userInfo = (state = initialState, action) => {
       return {
         ...state,
         where: action.payload,
+      };
+    case "GOT_COORDS":
+      return {
+        ...state,
+        coords: action.payload,
       };
     default:
       return state;

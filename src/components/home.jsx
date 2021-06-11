@@ -22,6 +22,9 @@ const Home = () => {
       ) : (
         ""
       )}
+      {tasks.map((task) => {
+        return <h1>{task}</h1>;
+      })}
     </div>
   );
 };
