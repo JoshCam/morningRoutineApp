@@ -1,10 +1,14 @@
 const selectedTasks = (state = { arr: [] }, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      return {
-        ...state,
-        arr: [...state.arr, action.payload],
-      };
+      if (state.arr.includes(action.payload)) {
+        // Do nothing
+        console.log("doing Nothing");
+      } else
+        return {
+          // ...state,
+          arr: [...state.arr, action.payload],
+        };
     default:
       return state;
   }

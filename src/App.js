@@ -1,11 +1,11 @@
 import "./App.css";
 import { useSelector } from "react-redux";
-// import { increment, decrement } from "./actions";
 
 // My Components
 import Home from "./components/home";
 import Info from "./components/info";
 import Tasks from "./components/tasks";
+import Routine from "./components/Routine";
 
 // screen 0 is inital info screen
 // screen 1 is homescreen
@@ -21,6 +21,8 @@ function App() {
         <Home />
       ) : screen === 2 ? (
         <Tasks />
+      ) : screen === 3 ? (
+        <Routine />
       ) : (
         "Error"
       )}

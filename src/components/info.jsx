@@ -12,6 +12,8 @@ import {
   updateCoords,
 } from "../actions/";
 
+// Screen that collects all user info
+
 const Info = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
@@ -25,14 +27,15 @@ const Info = () => {
   });
 
   const handleSelect = async (value) => {
+    // function to get address and coordinates of users work
     const results = await geocodeByAddress(value);
     const latlng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latlng);
     dispatch(updateWhere(value));
     dispatch(updateCoords(latlng));
-    console.log(value); //Address
-    console.log(latlng); //Coordinates
+    console.log(value); //Address of work
+    console.log(latlng); //Coordinates of work
   };
 
   return (
@@ -62,6 +65,7 @@ const Info = () => {
         {/* Only display code if user commutes */}
         {commute ? (
           <div>
+            {/* If users commute ask where they work */}
             <label>Where do you work?</label>
             <br></br>
 
@@ -108,12 +112,3 @@ const Info = () => {
 };
 
 export default Info;
-
-{
-  /* <input
-  type="text"
-  id="where"
-  value={where}
-  onChange={(e) => dispatch(updateWhere(e.target.value))}
-></input>; */
-}
