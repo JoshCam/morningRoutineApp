@@ -2,14 +2,32 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateHomeCoords, updateScreen } from "../actions/";
 
+import moment from "moment";
+
 // Screen that displays all selected tasks
 
 const Home = () => {
   const tasks = useSelector((state) => state.selectedTasks.arr);
   const commute = useSelector((state) => state.userInfo.commute);
+  const when = useSelector((state) => state.userInfo.when);
   const time = useSelector((state) => state.time);
   const dispatch = useDispatch();
-  // console.log(tasks.length);
+
+  // Turns when input into integers - will probs put in a function later
+  let newStr = when.split("");
+  newStr.splice(2, 1);
+  newStr = newStr.join("");
+  let hour = newStr.slice(0, 2);
+  let minute = newStr.slice(2, 4);
+
+  // Work out time to wake up
+  let wakeUp = moment()
+    .hours(hour)
+    .minutes(minute)
+    .subtract(time, "minutes")
+    .format("h:mm");
+
+  // console.log("wake up", wakeUp);
 
   if (commute) {
     // Gets coordinates of users home if they commute
@@ -51,14 +69,14 @@ const Home = () => {
           <p>Your morning routine should take you about {time} minutes</p>
           <p>That means if you want to make it to work on time</p>
           <p>(and not have to rush)</p>
-          <p>
-            You'll need to leave your place at WILL PROBS HAVE TO USE MOMENT FOR
-            THIS
-          </p>
-          <button onClick={() => dispatch(updateScreen(2))}>
-            test/Add More
-          </button>
-          <button onClick={() => dispatch(updateScreen(3))}>
+          <p>You'll need to wake up at {wakeUp}</p>
+          <button onClick={() => dispatch(updateScreen(2))}>Add More</button>
+          <button
+            onClick={
+              (() => dispatch(updateScreen(3)),
+              () => console.log(moment().format()))
+            }
+          >
             Start Routine
           </button>
         </div>

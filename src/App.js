@@ -6,10 +6,13 @@ import Home from "./components/home";
 import Info from "./components/info";
 import Tasks from "./components/tasks";
 import Routine from "./components/Routine";
+import RoutineTimer from "./components/RoutineTimer";
 
 // screen 0 is inital info screen
 // screen 1 is homescreen
 // screen 2 is Task Select screen
+// Screen 3 is to start morning routine timer
+// Screen 4 is morning routine timer
 
 function App() {
   const screen = useSelector((state) => state.screen);
@@ -23,6 +26,8 @@ function App() {
         <Tasks />
       ) : screen === 3 ? (
         <Routine />
+      ) : screen === 4 ? (
+        <RoutineTimer />
       ) : (
         "Error"
       )}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCard from "./TaskCard";
-import { updateScreen, posTask } from "../actions";
+import { updateScreen } from "../actions";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.posTasks);

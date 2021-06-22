@@ -6,7 +6,8 @@ let initialState = [
   ["Shower", 15],
   ["Make Up", 10],
   ["Skin Care", 5],
-  ["commute", 20],
+  ["Read the News", 10],
+  [("commute", 20)],
 ];
 const posTasks = (state = initialState, action) => {
   switch (action.type) {
