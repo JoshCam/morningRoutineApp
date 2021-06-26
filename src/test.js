@@ -22,13 +22,20 @@
 
 // console.log(d);
 
-var when = "22:22";
+// var when = "22:22";
 
-newStr = when.split(""); // or newStr = [...str];
-newStr.splice(2, 1);
-newStr = newStr.join("");
-hour = newStr.slice(0, 2);
-minute = newStr.slice(2, 4);
+// newStr = when.split(""); // or newStr = [...str];
+// newStr.splice(2, 1);
+// newStr = newStr.join("");
+// hour = newStr.slice(0, 2);
+// minute = newStr.slice(2, 4);
 
-console.log(hour);
-console.log(minute);
+// console.log(hour);
+// console.log(minute);
+
+let googURL =
+  "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
+
+fetch(googURL)
+  .then((response) => response.json())
+  .then((data) => console.log(data));

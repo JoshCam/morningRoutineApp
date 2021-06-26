@@ -4,6 +4,9 @@ import { updateHomeCoords, updateScreen } from "../actions/";
 
 import moment from "moment";
 
+let googURL =
+  "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
+
 // Screen that displays all selected tasks
 
 const Home = () => {
@@ -39,6 +42,9 @@ const Home = () => {
       };
       dispatch(updateHomeCoords(latlng));
     });
+    fetch(googURL)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 
   return (
@@ -57,7 +63,7 @@ const Home = () => {
       ) : // Map over tasks in selected tasks
       tasks.length > 0 ? (
         tasks.map((task) => {
-          return <h1>{task}</h1>;
+          return <h1>{task[0]}</h1>;
         })
       ) : (
         ""
@@ -71,12 +77,7 @@ const Home = () => {
           <p>(and not have to rush)</p>
           <p>You'll need to wake up at {wakeUp}</p>
           <button onClick={() => dispatch(updateScreen(2))}>Add More</button>
-          <button
-            onClick={
-              (() => dispatch(updateScreen(3)),
-              () => console.log(moment().format()))
-            }
-          >
+          <button onClick={() => dispatch(updateScreen(4))}>
             Start Routine
           </button>
         </div>

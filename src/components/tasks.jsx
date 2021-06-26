@@ -5,7 +5,14 @@ import { updateScreen } from "../actions";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.posTasks);
+  const commute = useSelector((state) => state.userInfo.commute);
   const dispatch = useDispatch();
+
+  if (commute) {
+    // import travel time into the commute array
+  } else {
+    // remove the commute array
+  }
 
   return (
     <div className="App">
