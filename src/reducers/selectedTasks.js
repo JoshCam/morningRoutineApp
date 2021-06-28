@@ -1,23 +1,11 @@
-const selectedTasks = (
-  state = { arr: [], currentTask: 0, startTime: 0 },
-  action
-) => {
+const selectedTasks = (state = { arr: [] }, action) => {
   switch (action.type) {
     case "ADD_TASK":
       // Adds a task to the array to be displayed on the home page
-      if (state.arr.includes(action.payload)) {
-        // Do nothing if task is already in array
-        console.log("doing Nothing");
-      } else
-        return {
-          ...state,
-          arr: [...state.arr, action.payload],
-        };
-    case "SET_TASK":
+      // MAKE THIS A SET? ONLY ONE OF EACH ITEM CAN EXIST IN IT!
       return {
         ...state,
-        currentTask: state.currentTask + 1,
-        startTime: 0,
+        arr: [...state.arr, action.payload],
       };
     default:
       return state;
@@ -25,3 +13,9 @@ const selectedTasks = (
 };
 
 export default selectedTasks;
+
+// for (var i = 0; i < state.arr.length; i++) {
+//   if (state.arr[i].task == action.payload.task) {
+//     console.log("doing nothing");
+//   }
+// }

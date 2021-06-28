@@ -33,9 +33,32 @@
 // console.log(hour);
 // console.log(minute);
 
-let googURL =
-  "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
+// let obj = {};
 
-fetch(googURL)
-  .then((response) => response.json())
-  .then((data) => console.log(data));
+// if (obj.lat) {
+//   console.log(true);
+// } else {
+//   console.log(false);
+// }
+
+let data = [
+  { task: "Wake Up", length: 1 },
+  { task: "Drink Water", length: 2 },
+  { task: "Make Bed", length: 1 },
+  { task: "Brush Teeth", length: 3 },
+  { task: "Shower", length: 15 },
+  { task: "Make Up", length: 10 },
+  { task: "Skin Care", length: 5 },
+  { task: "Read the News", length: 10 },
+  { task: "commute", length: 20 },
+];
+
+var id = "Wake Up";
+
+for (var i = 0; i < data.length; i++) {
+  if (data[i].task == id) {
+    data.splice(i, 1);
+  }
+}
+
+console.log(data);

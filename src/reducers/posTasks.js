@@ -1,25 +1,24 @@
 let initialState = [
-  ["Wake Up", 0.1],
-  ["Drink Water", 0.2],
-  ["Make Bed", 0.1],
-  ["Brush Teeth", 3],
-  ["Shower", 15],
-  ["Make Up", 10],
-  ["Skin Care", 5],
-  ["Read the News", 10],
-  ["commute", 20],
+  { task: "Wake Up", length: 0.05 },
+  { task: "Drink Water", length: 0.05 },
+  { task: "Make Bed", length: 1 },
+  { task: "Brush Teeth", length: 3 },
+  { task: "Shower", length: 15 },
+  { task: "Make Up", length: 10 },
+  { task: "Skin Care", length: 5 },
+  { task: "Read the News", length: 10 },
+  { task: "Commute", length: 1 },
 ];
 
 const posTasks = (state = initialState, action) => {
   switch (action.type) {
     case "REMOVE_TASK":
-      // console.log("This is working");
-      state.forEach((item, index) => {
-        if (item.indexOf(action.payload) > -1) {
-          state.splice(index, 1);
+      // Need to make it so we cant add the same task twice but struggling!
+      for (var i = 0; i < state.length; i++) {
+        if (state[i].task === action.payload) {
+          state.splice(i, 1);
         }
-      });
-      // console.log(state);
+      }
       return state;
     default:
       return state;

@@ -1,9 +1,10 @@
 let initialState = {
-  when: "00:00",
+  when: "00:00", //When the user starts work
   commute: false,
-  where: "",
-  coords: {},
-  homeCoords: {},
+  where: "", // Work address
+  coords: {}, //work
+  homeCoords: {}, //Home
+  duration: 0, // duration of travel time (commute) in seconds
 };
 
 const userInfo = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const userInfo = (state = initialState, action) => {
       return {
         ...state,
         homeCoords: action.payload,
+      };
+    case "UPDATE_DURATION":
+      return {
+        ...state,
+        duration: action.payload,
       };
     default:
       return state;

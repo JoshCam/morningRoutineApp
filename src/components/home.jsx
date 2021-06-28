@@ -1,19 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateHomeCoords, updateScreen } from "../actions/";
+import { updateHomeCoords, updateScreen, updateDuration } from "../actions/";
 
 import moment from "moment";
-
-let googURL =
-  "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
 
 // Screen that displays all selected tasks
 
 const Home = () => {
   const tasks = useSelector((state) => state.selectedTasks.arr);
+  console.log(tasks.length);
+  // userInfo
   const commute = useSelector((state) => state.userInfo.commute);
   const when = useSelector((state) => state.userInfo.when);
+
   const time = useSelector((state) => state.time);
+
+  const work = useSelector((state) => state.userInfo.coords);
+  const home = useSelector((state) => state.userInfo.homeCoords);
   const dispatch = useDispatch();
 
   // Turns when input into integers - will probs put in a function later
@@ -30,8 +33,6 @@ const Home = () => {
     .subtract(time, "minutes")
     .format("h:mm");
 
-  // console.log("wake up", wakeUp);
-
   if (commute) {
     // Gets coordinates of users home if they commute
     // This is to later calculate their commute time
@@ -42,9 +43,25 @@ const Home = () => {
       };
       dispatch(updateHomeCoords(latlng));
     });
+  }
+
+  if (home.lat) {
+    let googURL =
+      "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" +
+      home.lat +
+      "," +
+      home.lng +
+      "&destinations=" +
+      work.lat +
+      "," +
+      work.lng +
+      "&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
+
     fetch(googURL)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) =>
+        dispatch(updateDuration(data.rows[0].elements[0].duration.value))
+      );
   }
 
   return (
@@ -63,7 +80,7 @@ const Home = () => {
       ) : // Map over tasks in selected tasks
       tasks.length > 0 ? (
         tasks.map((task) => {
-          return <h1>{task[0]}</h1>;
+          return <h1>{task.task}</h1>;
         })
       ) : (
         ""

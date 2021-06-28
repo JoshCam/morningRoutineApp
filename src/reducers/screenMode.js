@@ -8,3 +8,9 @@ const screenMode = (state = 0, action) => {
 };
 
 export default screenMode;
+
+// screen 0 is inital info screen
+// screen 1 is homescreen
+// screen 2 is Task Select screen
+// Screen 3 is to start morning routine timer
+// Screen 4 is morning routine timer

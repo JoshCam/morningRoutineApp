@@ -47,6 +47,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SingleRoutine from "./SingleRoutine";
+import Completed from "./Completed";
+
+var timer = null;
 
 class RoutineTimer extends Component {
   state = {
@@ -58,7 +61,7 @@ class RoutineTimer extends Component {
 
   componentDidMount = () => {
     this.setTaskProps();
-    setInterval(() => {
+    timer = setInterval(() => {
       this.checkForNextTask();
     }, 250);
   };
@@ -71,18 +74,29 @@ class RoutineTimer extends Component {
   };
 
   setTaskProps = () => {
-    const length = this.props.tasks[this.state.currentTask][1] * 60 * 1000;
-    const completeTime = new Date(new Date().getTime() + length);
-    this.setState({ completeTime: completeTime });
+    if (this.props.tasks.length === this.state.currentTask) {
+      console.log("all done");
+      clearTimeout(timer);
+    } else {
+      const length =
+        this.props.tasks[this.state.currentTask].length * 60 * 1000;
+      const completeTime = new Date(new Date().getTime() + length);
+      this.setState({ completeTime: completeTime });
+    }
   };
 
   render() {
-    // console.log(this.state);
     return (
-      <SingleRoutine
-        task={this.props.tasks[this.state.currentTask][0]}
-        completeTime={this.state.completeTime}
-      />
+      <div>
+        {this.props.tasks.length !== this.state.currentTask ? (
+          <SingleRoutine
+            task={this.props.tasks[this.state.currentTask].task}
+            completeTime={this.state.completeTime}
+          />
+        ) : (
+          <Completed />
+        )}
+      </div>
     );
   }
 }

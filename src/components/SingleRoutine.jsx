@@ -19,12 +19,10 @@ const SingleRoutine = (props) => {
     }, 250);
   });
 
-  console.log(props);
   return (
     <div>
       <p>{props.task}</p>
       <p>{Math.round(timeLeft / 1000)}</p>
-      <p>{props.completeTime.getTime()}</p>
     </div>
   );
 };

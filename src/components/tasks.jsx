@@ -5,19 +5,29 @@ import { updateScreen } from "../actions";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.posTasks);
-  const commute = useSelector((state) => state.userInfo.commute);
+  const duration = useSelector((state) => state.userInfo.duration);
   const dispatch = useDispatch();
 
-  if (commute) {
-    // import travel time into the commute array
+  let travelTime;
+  if (duration) {
+    travelTime = duration / 60; // to get minutes (will have to implement getting hours as well)
   } else {
     // remove the commute array
   }
 
+  // Possibly add an if statement/create an action + reducer to remove commute if the user never selects it in info screen
+
   return (
     <div className="App">
       {tasks.map((task) => {
-        return <TaskCard task={task[0]} time={task[1]} />;
+        return (
+          <TaskCard
+            task={task.task}
+            time={
+              task.task === "Commute" ? Math.round(travelTime) : task.length
+            }
+          />
+        );
       })}
       <button onClick={() => dispatch(updateScreen(1))}>Done</button>
     </div>

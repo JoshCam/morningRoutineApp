@@ -17,25 +17,19 @@ import {
 const Info = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
-  // const where = useSelector((state) => state.userInfo.where);
   const dispatch = useDispatch();
 
   const [address, setAddress] = React.useState("");
-  const [coordinates, setCoordinates] = React.useState({
-    lat: null,
-    lng: null,
-  });
 
   const handleSelect = async (value) => {
     // function to get address and coordinates of users work
     const results = await geocodeByAddress(value);
     const latlng = await getLatLng(results[0]);
     setAddress(value);
-    setCoordinates(latlng);
     dispatch(updateWhere(value));
     dispatch(updateCoords(latlng));
-    console.log(value); //Address of work
-    console.log(latlng); //Coordinates of work
+    // console.log(value); //Address of work
+    // console.log(latlng); //Coordinates of work
   };
 
   return (

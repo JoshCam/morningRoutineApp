@@ -43,6 +43,14 @@ export const updateHomeCoords = (info) => {
   };
 };
 
+export const updateDuration = (info) => {
+  // Add commute time in seconds to state if user said they commute
+  return {
+    type: "UPDATE_DURATION",
+    payload: info,
+  };
+};
+
 export const addTask = (task) => {
   // Add a task to the selectedTasks list - this displays on the home screen!
   return {
