@@ -51,6 +51,13 @@ export const updateDuration = (info) => {
   };
 };
 
+export const removeCommute = () => {
+  // Remove commute from list of tasks if user said they dont commute!
+  return {
+    type: "REMOVE_COMMUTE",
+  };
+};
+
 export const addTask = (task) => {
   // Add a task to the selectedTasks list - this displays on the home screen!
   return {
@@ -63,6 +70,14 @@ export const posTask = (task) => {
   // Remove a task from the "posTask" (Possible Tasks to choose from)
   return {
     type: "REMOVE_TASK",
+    payload: task,
+  };
+};
+
+export const addToPosTasks = (task) => {
+  // Send task back to pos Task array
+  return {
+    type: "ADD_TO_POS_TASKS",
     payload: task,
   };
 };

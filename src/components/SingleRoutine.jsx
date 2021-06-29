@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 var timer = null;
 
@@ -22,7 +23,11 @@ const SingleRoutine = (props) => {
   return (
     <div>
       <p>{props.task}</p>
-      <p>{Math.round(timeLeft / 1000)}</p>
+      <p>
+        {moment
+          .utc(moment.duration(timeLeft / 1000, "seconds").asMilliseconds())
+          .format("HH:mm:ss")}
+      </p>
     </div>
   );
 };

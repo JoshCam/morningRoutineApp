@@ -2,7 +2,7 @@ const selectedTasks = (state = { arr: [] }, action) => {
   switch (action.type) {
     case "ADD_TASK":
       // Adds a task to the array to be displayed on the home page
-      // MAKE THIS A SET? ONLY ONE OF EACH ITEM CAN EXIST IN IT!
+      // Need to workout how to stop duplicates!
       return {
         ...state,
         arr: [...state.arr, action.payload],

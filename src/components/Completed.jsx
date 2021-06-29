@@ -8,7 +8,8 @@ const Completed = () => {
     <div>
       <p>Well done you completed your morning routine!</p>
       <p>If you managed everything on time then you should be</p>
-      <p>just about getting ready for work!</p>
+      <p>just getting ready to start work!</p>
+      <p>Have a great day</p>
       <button onClick={() => dispatch(updateScreen(1))}>Done</button>
     </div>
   );

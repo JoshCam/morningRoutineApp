@@ -1,14 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateHomeCoords, updateScreen, updateDuration } from "../actions/";
+import {
+  updateHomeCoords,
+  updateScreen,
+  updateDuration,
+  // addToPosTasks,
+} from "../actions/";
 
 import moment from "moment";
 
 // Screen that displays all selected tasks
 
 const Home = () => {
-  const tasks = useSelector((state) => state.selectedTasks.arr);
-  console.log(tasks.length);
+  const selectedTasks = useSelector((state) => state.selectedTasks.arr);
+  const posTasks = useSelector((state) => state.posTasks);
+  // console.log("tasks", selectedTasks);
   // userInfo
   const commute = useSelector((state) => state.userInfo.commute);
   const when = useSelector((state) => state.userInfo.when);
@@ -67,7 +73,7 @@ const Home = () => {
   return (
     <div className="App">
       {/* If no tasks selected display this */}
-      {tasks.length === 0 ? (
+      {selectedTasks.length === 0 ? (
         <div>
           <h1>Your Morning Routing</h1>
           <p>It Looks Like you haven't got any tasks!</p>
@@ -78,16 +84,27 @@ const Home = () => {
           </button>
         </div>
       ) : // Map over tasks in selected tasks
-      tasks.length > 0 ? (
-        tasks.map((task) => {
-          return <h1>{task.task}</h1>;
+      selectedTasks.length > 0 ? (
+        selectedTasks.map((task) => {
+          return (
+            <h1
+            // trying to add ability to remove from selected and add back to pos
+            // onClick={() =>
+            //   dispatch(
+            //     addToPosTasks({ task: task.task, length: task.length })
+            //   )
+            // }
+            >
+              {task.task}
+            </h1>
+          );
         })
       ) : (
         ""
       )}
       {/* If tasks have been selected then display this */}
 
-      {tasks.length > 0 ? (
+      {selectedTasks.length > 0 ? (
         <div>
           <p>Your morning routine should take you about {time} minutes</p>
           <p>That means if you want to make it to work on time</p>

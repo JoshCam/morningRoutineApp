@@ -13,13 +13,23 @@ let initialState = [
 const posTasks = (state = initialState, action) => {
   switch (action.type) {
     case "REMOVE_TASK":
-      // Need to make it so we cant add the same task twice but struggling!
       for (var i = 0; i < state.length; i++) {
         if (state[i].task === action.payload) {
           state.splice(i, 1);
         }
       }
       return state;
+    case "REMOVE_COMMUTE":
+      for (var i = 0; i < state.length; i++) {
+        if (state[i].task === "Commute") {
+          state.splice(i, 1);
+        }
+      }
+      return state;
+    // Possible case to add task back to Pos tasks (remove from selected)
+    // case "ADD_TO_POS_TASKS":
+    //   console.log("this is working");
+    //   return state + state.push(action.payload);
     default:
       return state;
   }

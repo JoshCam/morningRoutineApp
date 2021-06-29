@@ -1,25 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCard from "./TaskCard";
-import { updateScreen } from "../actions";
+import { updateScreen, removeCommute } from "../actions";
 
 const Tasks = () => {
-  const tasks = useSelector((state) => state.posTasks);
+  const posTasks = useSelector((state) => state.posTasks);
   const duration = useSelector((state) => state.userInfo.duration);
   const dispatch = useDispatch();
 
   let travelTime;
-  if (duration) {
-    travelTime = duration / 60; // to get minutes (will have to implement getting hours as well)
+  if (duration > 0) {
+    travelTime = duration / 60;
+    console.log("commuting");
   } else {
-    // remove the commute array
+    dispatch(removeCommute());
+    console.log("not commuting");
   }
-
-  // Possibly add an if statement/create an action + reducer to remove commute if the user never selects it in info screen
 
   return (
     <div className="App">
-      {tasks.map((task) => {
+      {posTasks.map((task) => {
         return (
           <TaskCard
             task={task.task}
