@@ -75,8 +75,9 @@ class RoutineTimer extends Component {
 
   setTaskProps = () => {
     if (this.props.tasks.length === this.state.currentTask) {
-      console.log("all done");
+      // console.log("all done");
       clearTimeout(timer);
+      document.body.style.backgroundColor = "#fdf7d8"; //Set bgColor back to yellow
     } else {
       const length =
         this.props.tasks[this.state.currentTask].length * 60 * 1000;

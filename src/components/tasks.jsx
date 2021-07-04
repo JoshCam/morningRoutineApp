@@ -11,10 +11,10 @@ const Tasks = () => {
   let travelTime;
   if (duration > 0) {
     travelTime = duration / 60;
-    console.log("commuting");
+    // console.log("commuting");
   } else {
     dispatch(removeCommute());
-    console.log("not commuting");
+    // console.log("not commuting");
   }
 
   return (

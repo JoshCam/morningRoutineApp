@@ -6,7 +6,7 @@ import {
   updateDuration,
   addTaskToPos,
   removeTaskFromSelected,
-} from "../actions/";
+} from "../actions";
 
 import moment from "moment";
 

@@ -8,12 +8,9 @@ const selectedTasks = (state = { arr: [] }, action) => {
       );
       return state;
     case "REMOVE_TASK_FROM_SELECTED":
-      console.log("Tring to remove from selected");
-      console.log(action.payload);
       for (var i = 0; i < state.arr.length; i++) {
         if (state.arr[i].task === action.payload.task) {
           state.arr.splice(i, 1);
-          console.log("Sice");
         }
       }
       return state;

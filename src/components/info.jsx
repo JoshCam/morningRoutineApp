@@ -10,7 +10,7 @@ import {
   updateCommute,
   updateWhere,
   updateCoords,
-} from "../actions/";
+} from "../actions";
 
 // Screen that collects all user info
 

@@ -1,6 +1,6 @@
 let initialState = [
-  { task: "Wake Up", length: 0.05 },
-  { task: "Drink Water", length: 0.05 },
+  { task: "Wake Up", length: 1 },
+  { task: "Drink Water", length: 2 },
   { task: "Make Bed", length: 1 },
   { task: "Brush Teeth", length: 3 },
   { task: "Shower", length: 15 },
@@ -29,9 +29,9 @@ const posTasks = (state = initialState, action) => {
       return state;
     // Possible case to add task back to Pos tasks (remove from selected)
     case "ADD_TASK_TO_POS":
-      console.log("tring to add task");
+      // console.log("tring to add task");
       state = [...state, action.payload];
-      console.log("pos", state);
+      // console.log("pos", state);
       return state;
     default:
       return state;
