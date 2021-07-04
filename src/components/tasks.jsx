@@ -29,7 +29,9 @@ const Tasks = () => {
           />
         );
       })}
-      <button onClick={() => dispatch(updateScreen(1))}>Done</button>
+      <a className="btn" onClick={() => dispatch(updateScreen(1))}>
+        Done
+      </a>
     </div>
   );
 };

@@ -12,9 +12,9 @@ const TaskCard = (props) => {
   };
 
   return (
-    <h1 onClick={() => handleClick()}>
+    <p className="posTask" onClick={() => handleClick()}>
       {props.task} - {props.time} min
-    </h1>
+    </p>
   );
 };
 

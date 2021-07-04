@@ -74,29 +74,30 @@ const Home = () => {
     <div className="App">
       {/* If no tasks selected display this */}
       {selectedTasks.length === 0 ? (
-        <div>
-          <h1>Your Morning Routing</h1>
+        <div className="container">
+          <p className="heading">Your Morning Routing</p>
           <p>It Looks Like you haven't got any tasks!</p>
           <p>Start building your morning routine</p>
 
-          <button onClick={() => dispatch(updateScreen(2))}>
+          <a className="btn build" onClick={() => dispatch(updateScreen(2))}>
             Build Your Routine
-          </button>
+          </a>
         </div>
       ) : // Map over tasks in selected tasks
       selectedTasks.length > 0 ? (
         selectedTasks.map((task) => {
           return (
-            <h1
-            // trying to add ability to remove from selected and add back to pos
-            // onClick={() =>
-            //   dispatch(
-            //     addToPosTasks({ task: task.task, length: task.length })
-            //   )
-            // }
+            <p
+              className="selectedTask"
+              // trying to add ability to remove from selected and add back to pos
+              // onClick={() =>
+              //   dispatch(
+              //     addToPosTasks({ task: task.task, length: task.length })
+              //   )
+              // }
             >
               {task.task}
-            </h1>
+            </p>
           );
         })
       ) : (
@@ -105,15 +106,19 @@ const Home = () => {
       {/* If tasks have been selected then display this */}
 
       {selectedTasks.length > 0 ? (
-        <div>
+        <div className="homeInfoContainer">
           <p>Your morning routine should take you about {time} minutes</p>
           <p>That means if you want to make it to work on time</p>
-          <p>(and not have to rush)</p>
+          {/* <p>(and not have to rush)</p> */}
           <p>You'll need to wake up at {wakeUp}</p>
-          <button onClick={() => dispatch(updateScreen(2))}>Add More</button>
-          <button onClick={() => dispatch(updateScreen(4))}>
-            Start Routine
-          </button>
+          <div className="btnContainer">
+            <a className="btn add" onClick={() => dispatch(updateScreen(2))}>
+              Add More
+            </a>
+            <a className="btn start" onClick={() => dispatch(updateScreen(4))}>
+              Start Routine
+            </a>
+          </div>
         </div>
       ) : (
         ""

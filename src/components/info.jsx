@@ -33,12 +33,13 @@ const Info = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Info</h1>
       <form>
         <label>When do you start work in the morning?</label>
         <br></br>
         <input
+          className="when"
           id="when"
           type="time"
           value={when}
@@ -48,6 +49,7 @@ const Info = () => {
         <label>Do you commute?</label>
         <br></br>
         <select
+          className="commute"
           id="commute"
           value={commute}
           onChange={(e) => dispatch(updateCommute(e.target.value))}
@@ -75,15 +77,21 @@ const Info = () => {
                 loading,
               }) => (
                 <div>
-                  <input {...getInputProps({ placeholder: "Address" })} />
-                  <div>
+                  <input
+                    className="where"
+                    {...getInputProps({ placeholder: "Address" })}
+                  />
+                  <div className="outputBox">
                     {loading ? <div>Loading...</div> : null}
                     {suggestions.map((suggestion) => {
                       const style = {
-                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                        fontWeight: suggestion.active ? 800 : 400,
                       };
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <div
+                          className="outputBox"
+                          {...getSuggestionItemProps(suggestion, { style })}
+                        >
                           {suggestion.description}
                         </div>
                       );
@@ -97,8 +105,8 @@ const Info = () => {
           ""
         )}
         <br></br>
-        <a onClick={() => dispatch(updateScreen(1))}>
-          <button>Finished</button>
+        <a className="btn" onClick={() => dispatch(updateScreen(1))}>
+          Finished
         </a>
       </form>
     </div>

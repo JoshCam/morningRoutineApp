@@ -10,7 +10,10 @@ const Completed = () => {
       <p>If you managed everything on time then you should be</p>
       <p>just getting ready to start work!</p>
       <p>Have a great day</p>
-      <button onClick={() => dispatch(updateScreen(1))}>Done</button>
+
+      <a className="btn" onClick={() => dispatch(updateScreen(1))}>
+        Done
+      </a>
     </div>
   );
 };

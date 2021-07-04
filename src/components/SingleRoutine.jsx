@@ -21,9 +21,10 @@ const SingleRoutine = (props) => {
   });
 
   return (
-    <div>
+    <div className="singleTask">
       <p>{props.task}</p>
-      <p>
+      <p className="timer">
+        {/* formats timmer into H:M:S - can change to M:S if i want */}
         {moment
           .utc(moment.duration(timeLeft / 1000, "seconds").asMilliseconds())
           .format("HH:mm:ss")}

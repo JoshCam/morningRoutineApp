@@ -1,10 +1,13 @@
+$backgroundColour: #f7cacd;
+$textColour: #64113f;
+
 * {
   font-family: "Poppins", sans-serif;
 }
 
 body {
-  background-color: #f7cacd;
-  color: #64113f;
+  background-color: $backgroundColour;
+  color: $textColour;
 }
 
 .when,
@@ -12,12 +15,10 @@ body {
 .where {
   margin: 10px;
   padding: 5px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 6px;
   border: 0;
 }
-
 .where {
   width: 50%;
 }
@@ -38,19 +39,17 @@ body {
   border: 0.1em solid #64113f;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   text-decoration: none;
   font-weight: 300;
   text-align: center;
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
   width: 120px;
-}
-
-.btn:hover, .btn:active {
-  color: #f7cacd;
-  background: #64113f;
+  &:hover,
+  &:active {
+    color: #f7cacd;
+    background: #64113f;
+  }
 }
 
 @media all and (min-width: 30em) {
@@ -59,34 +58,30 @@ body {
     margin: 0.4em auto;
   }
 }
-
+// Start routine button
 .start {
   margin: 0.2em;
 }
-
+// Add to routine Button
 .add {
   margin: 0.2em;
   padding: 1em;
 }
-
+// Build Routine Button
 .build {
   margin-top: 4em;
 }
-
+// Container for start and add btns
 .btnContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
-
+// container for info screen
 .container {
   display: block;
   margin: 30% 0 0 0;
 }
-
+// Text for headings
 .heading {
   font-size: xx-large;
   font-weight: 600;
@@ -95,6 +90,8 @@ body {
 .selectedTask {
   font-size: 21px;
   font-weight: 600;
+  // text-align: center;
+  // text-justify: inter-word;
 }
 
 .posTask {
@@ -104,18 +101,15 @@ body {
 
 .singleTask {
   margin-top: 45%;
+  p {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .timer {
+    margin: auto;
+    letter-spacing: 5px;
+    padding: 20px;
+    border: 1px solid black;
+    width: 50%;
+  }
 }
-
-.singleTask p {
-  font-size: 30px;
-  font-weight: 600;
-}
-
-.singleTask .timer {
-  margin: auto;
-  letter-spacing: 5px;
-  padding: 20px;
-  border: 1px solid black;
-  width: 50%;
-}
-/*# sourceMappingURL=App.css.map */
