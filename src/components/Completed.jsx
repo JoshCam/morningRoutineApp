@@ -5,7 +5,7 @@ import { updateScreen } from "../actions/";
 const Completed = () => {
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className="completedContainer">
       <p>Well done you completed your morning routine!</p>
       <p>If you managed everything on time then you should be</p>
       <p>just getting ready to start work!</p>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateHomeCoords,
   updateScreen,
   updateDuration,
-  // addToPosTasks,
+  addTaskToPos,
+  removeTaskFromSelected,
 } from "../actions/";
 
 import moment from "moment";
@@ -75,7 +76,7 @@ const Home = () => {
       {/* If no tasks selected display this */}
       {selectedTasks.length === 0 ? (
         <div className="container">
-          <p className="heading">Your Morning Routing</p>
+          <p className="heading">Your Morning Routine</p>
           <p>It Looks Like you haven't got any tasks!</p>
           <p>Start building your morning routine</p>
 
@@ -85,21 +86,29 @@ const Home = () => {
         </div>
       ) : // Map over tasks in selected tasks
       selectedTasks.length > 0 ? (
-        selectedTasks.map((task) => {
-          return (
-            <p
-              className="selectedTask"
-              // trying to add ability to remove from selected and add back to pos
-              // onClick={() =>
-              //   dispatch(
-              //     addToPosTasks({ task: task.task, length: task.length })
-              //   )
-              // }
-            >
-              {task.task}
-            </p>
-          );
-        })
+        <div className="selectedTaskContainer">
+          {selectedTasks.map((task) => {
+            return (
+              <p
+                className="selectedTask"
+                // trying to add ability to remove from selected and add back to pos
+                onClick={() => {
+                  dispatch(
+                    addTaskToPos({ task: task.task, length: task.length })
+                  );
+                  dispatch(
+                    removeTaskFromSelected({
+                      task: task.task,
+                      length: task.length,
+                    })
+                  );
+                }}
+              >
+                {task.task}
+              </p>
+            );
+          })}
+        </div>
       ) : (
         ""
       )}
@@ -107,10 +116,14 @@ const Home = () => {
 
       {selectedTasks.length > 0 ? (
         <div className="homeInfoContainer">
-          <p>Your morning routine should take you about {time} minutes</p>
-          <p>That means if you want to make it to work on time</p>
-          {/* <p>(and not have to rush)</p> */}
-          <p>You'll need to wake up at {wakeUp}</p>
+          <div className="homeTextContainer">
+            <p>Your morning routine should take you {time} minutes</p>
+            <p>That means if you want to start work on time</p>
+            {/* <p>(and not have to rush)</p> */}
+            <p>You'll need to wake up at {wakeUp}</p>
+            <p className="small">(To remove a task just click it!)</p>
+          </div>
+
           <div className="btnContainer">
             <a className="btn add" onClick={() => dispatch(updateScreen(2))}>
               Add More
@@ -128,3 +141,15 @@ const Home = () => {
 };
 
 export default Home;
+
+// () => {
+//   dispatch(addTaskToPos({ task: task.task, length: task.length }));
+// },
+//   () => {
+//     dispatch(
+//       removeTaskFromSelected({
+//         task: task.task,
+//         length: task.length,
+//       })
+//     );
+//   };

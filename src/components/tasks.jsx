@@ -18,7 +18,8 @@ const Tasks = () => {
   }
 
   return (
-    <div className="App">
+    <div className="tasksContainer">
+      <p className="heading">Choose your routine</p>
       {posTasks.map((task) => {
         return (
           <TaskCard
@@ -29,7 +30,7 @@ const Tasks = () => {
           />
         );
       })}
-      <a className="btn" onClick={() => dispatch(updateScreen(1))}>
+      <a className="btn doneTasks" onClick={() => dispatch(updateScreen(1))}>
         Done
       </a>
     </div>

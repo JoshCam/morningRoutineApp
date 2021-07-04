@@ -7,12 +7,13 @@ let initialState = [
   { task: "Make Up", length: 10 },
   { task: "Skin Care", length: 5 },
   { task: "Read the News", length: 10 },
+  { task: "Exercise", length: 30 },
   { task: "Commute", length: 1 },
 ];
 
 const posTasks = (state = initialState, action) => {
   switch (action.type) {
-    case "REMOVE_TASK":
+    case "REMOVE_TASK_FROM_POS":
       for (var i = 0; i < state.length; i++) {
         if (state[i].task === action.payload) {
           state.splice(i, 1);
@@ -27,9 +28,11 @@ const posTasks = (state = initialState, action) => {
       }
       return state;
     // Possible case to add task back to Pos tasks (remove from selected)
-    // case "ADD_TO_POS_TASKS":
-    //   console.log("this is working");
-    //   return state + state.push(action.payload);
+    case "ADD_TASK_TO_POS":
+      console.log("tring to add task");
+      state = [...state, action.payload];
+      console.log("pos", state);
+      return state;
     default:
       return state;
   }

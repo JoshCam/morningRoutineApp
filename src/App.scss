@@ -1,6 +1,6 @@
-$backgroundColour: #f7cacd;
-$textColour: #64113f;
-
+$backgroundColour: #fdf7d8;
+$textColour: #0c1b33;
+// FF6B35 - hex for poss screen flash on task complete
 * {
   font-family: "Poppins", sans-serif;
 }
@@ -24,7 +24,7 @@ body {
 }
 
 .outputBox {
-  background-color: #f7cacd;
+  background-color: $backgroundColour;
   width: 100%;
   overflow: hidden;
 }
@@ -36,7 +36,7 @@ body {
 .btn {
   display: inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid #64113f;
+  border: 0.1em solid $textColour;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   box-sizing: border-box;
@@ -47,8 +47,8 @@ body {
   width: 120px;
   &:hover,
   &:active {
-    color: #f7cacd;
-    background: #64113f;
+    color: $backgroundColour;
+    background: $textColour;
   }
 }
 
@@ -71,8 +71,19 @@ body {
 .build {
   margin-top: 4em;
 }
+// Done button is tasks component
+.doneTasks {
+  position: fixed;
+  bottom: 10vh;
+  right: 35%;
+  left: 35%;
+}
 // Container for start and add btns
 .btnContainer {
+  position: fixed;
+  bottom: 10vh;
+  right: 10%;
+  left: 10%;
   display: flex;
   justify-content: center;
 }
@@ -90,13 +101,15 @@ body {
 .selectedTask {
   font-size: 21px;
   font-weight: 600;
-  // text-align: center;
-  // text-justify: inter-word;
+  margin: 0.2em;
+  padding: 0;
 }
 
 .posTask {
   font-weight: 600;
   font-size: 21px;
+  margin: 2%;
+  padding: 0;
 }
 
 .singleTask {
@@ -112,4 +125,49 @@ body {
     border: 1px solid black;
     width: 50%;
   }
+}
+
+.tasksContainer {
+  position: relative;
+}
+
+.selectedTaskContainer {
+  display: flex;
+  top: 5%;
+  height: 55vh;
+  flex-direction: column;
+  justify-content: center;
+  overflow: scroll;
+  // border: 1px black solid;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.selectedTaskContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.selectedTaskContainer {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.homeTextContainer {
+  position: fixed;
+  bottom: 20vh;
+  left: 5%;
+  right: 5%;
+}
+
+.completedContainer {
+  margin-top: 30%;
+}
+
+.singleTaskContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.small {
+  font-size: 12px;
 }

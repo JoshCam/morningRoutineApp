@@ -61,7 +61,15 @@ export const removeCommute = () => {
 export const addTask = (task) => {
   // Add a task to the selectedTasks list - this displays on the home screen!
   return {
-    type: "ADD_TASK",
+    type: "ADD_TASK_TO_SELECTED",
+    payload: task,
+  };
+};
+
+export const removeTaskFromSelected = (task) => {
+  // Remove a task from the selected Tasks
+  return {
+    type: "REMOVE_TASK_FROM_SELECTED",
     payload: task,
   };
 };
@@ -69,15 +77,15 @@ export const addTask = (task) => {
 export const posTask = (task) => {
   // Remove a task from the "posTask" (Possible Tasks to choose from)
   return {
-    type: "REMOVE_TASK",
+    type: "REMOVE_TASK_FROM_POS",
     payload: task,
   };
 };
 
-export const addToPosTasks = (task) => {
+export const addTaskToPos = (task) => {
   // Send task back to pos Task array
   return {
-    type: "ADD_TO_POS_TASKS",
+    type: "ADD_TASK_TO_POS",
     payload: task,
   };
 };
