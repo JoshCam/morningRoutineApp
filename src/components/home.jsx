@@ -26,7 +26,7 @@ const Home = () => {
   const home = useSelector((state) => state.userInfo.homeCoords);
   const dispatch = useDispatch();
 
-  // Turns when input into integers - will probs put in a function later
+  // Turns 'when' input into integers - will probs put in a function later
   let newStr = when.split("");
   newStr.splice(2, 1);
   newStr = newStr.join("");

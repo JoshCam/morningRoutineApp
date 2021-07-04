@@ -16,9 +16,13 @@ const SingleRoutine = (props) => {
     "#E6CBFF",
     "#A0FEF4",
     "#FFDEB9",
+    "#ffb3ba",
+    "#baffc9",
+    "#ffdfba",
   ];
 
   useEffect(() => {
+    // Changes background colour at random for each task
     document.body.style.backgroundColor =
       bgColors[Math.floor(Math.random() * bgColors.length)];
   }, [props.task]);
