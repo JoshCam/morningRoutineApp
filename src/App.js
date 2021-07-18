@@ -2,9 +2,9 @@ import "./App.css";
 import { useSelector } from "react-redux";
 
 // My Components
-import Home from "./components/home";
-import Info from "./components/info";
-import Tasks from "./components/tasks";
+import Home from "./components/Home";
+import Info from "./components/Info";
+import Tasks from "./components/Tasks";
 import Routine from "./components/Routine";
 import RoutineTimer from "./components/RoutineTimer";
 
