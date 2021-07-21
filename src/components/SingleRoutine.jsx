@@ -35,6 +35,7 @@ const SingleRoutine = (props) => {
     return function cleanup() {
       clearInterval(timer);
     };
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

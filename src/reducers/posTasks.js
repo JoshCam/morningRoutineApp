@@ -1,7 +1,7 @@
 let initialState = [
-  { task: "Wake Up", length: 0.1 },
-  { task: "Drink Water", length: 0.2 },
-  { task: "Make Bed", length: 0.1 },
+  { task: "Wake Up", length: 1 },
+  { task: "Drink Water", length: 2 },
+  { task: "Make Bed", length: 1 },
   { task: "Brush Teeth", length: 3 },
   { task: "Shower", length: 15 },
   { task: "Make Up", length: 10 },
@@ -21,6 +21,7 @@ const posTasks = (state = initialState, action) => {
       }
       return state;
     case "REMOVE_COMMUTE":
+      // eslint-disable-next-line
       for (var i = 0; i < state.length; i++) {
         if (state[i].task === "Commute") {
           state.splice(i, 1);
