@@ -20,9 +20,10 @@ const Tasks = () => {
   return (
     <div className="tasksContainer">
       <p className="heading">Choose your routine</p>
-      {posTasks.map((task) => {
+      {posTasks.map((task, index) => {
         return (
           <TaskCard
+            key={index}
             task={task.task}
             time={
               task.task === "Commute" ? Math.round(travelTime) : task.length
@@ -30,7 +31,11 @@ const Tasks = () => {
           />
         );
       })}
-      <a className="btn doneTasks" onClick={() => dispatch(updateScreen(1))}>
+      <a
+        href="/#"
+        className="btn doneTasks"
+        onClick={() => dispatch(updateScreen(1))}
+      >
         Done
       </a>
     </div>

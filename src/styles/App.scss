@@ -1,0 +1,14 @@
+$backgroundColour: #fdf7d8;
+$textColour: #0c1b33;
+
+// All styles in this file are for phone, below is desktop
+// Similar but just a bit better for wider screens
+
+// desktop
+@media (min-width: 601px) {
+  @import "desktop";
+}
+
+@media (max-width: 600px) {
+  @import "mobile";
+}

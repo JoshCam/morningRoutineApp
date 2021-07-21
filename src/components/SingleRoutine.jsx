@@ -7,33 +7,38 @@ var timer = null;
 const SingleRoutine = (props) => {
   const [timeLeft, setTimeLeft] = useState(0);
 
-  let bgColors = [
-    "#E3EFF2",
-    "#D9E9D8",
-    "#FAF0CA",
-    "#F8DDEB",
-    "#F5F5F5",
-    "#E6CBFF",
-    "#A0FEF4",
-    "#FFDEB9",
-    "#ffb3ba",
-    "#baffc9",
-    "#ffdfba",
-  ];
-
   useEffect(() => {
+    let bgColors = [
+      "#E3EFF2",
+      "#D9E9D8",
+      "#FAF0CA",
+      "#F8DDEB",
+      "#F5F5F5",
+      "#E6CBFF",
+      "#A0FEF4",
+      "#FFDEB9",
+      "#ffb3ba",
+      "#baffc9",
+      "#ffdfba",
+    ];
     // Changes background colour at random for each task
     document.body.style.backgroundColor =
       bgColors[Math.floor(Math.random() * bgColors.length)];
   }, [props.task]);
 
   useEffect(() => {
+    // sets time left every 250ms for a smooth counter
     timer = setInterval(() => {
       setTimeLeft(props.completeTime.getTime() - Date.now());
     }, 250);
+    // Cleans up the useEffect
+    return function cleanup() {
+      clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
+    // sets time left every 250ms for a smooth counter
     clearTimeout(timer);
     timer = setInterval(() => {
       setTimeLeft(props.completeTime.getTime() - Date.now());
@@ -45,7 +50,7 @@ const SingleRoutine = (props) => {
       <div className="singleTask">
         <p>{props.task}</p>
         <p className="timer">
-          {/* formats timmer into H:M:S - can change to M:S if i want */}
+          {/* formats timer into H:M:S - can change to M:S if i want */}
           {moment
             .utc(moment.duration(timeLeft / 1000, "seconds").asMilliseconds())
             .format("HH:mm:ss")}

@@ -1,7 +1,7 @@
 let initialState = [
-  { task: "Wake Up", length: 1 },
-  { task: "Drink Water", length: 2 },
-  { task: "Make Bed", length: 1 },
+  { task: "Wake Up", length: 0.1 },
+  { task: "Drink Water", length: 0.2 },
+  { task: "Make Bed", length: 0.1 },
   { task: "Brush Teeth", length: 3 },
   { task: "Shower", length: 15 },
   { task: "Make Up", length: 10 },

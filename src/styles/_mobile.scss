@@ -3,8 +3,8 @@
 }
 
 body {
-  background-color: #fdf7d8;
-  color: #0c1b33;
+  background-color: $backgroundColour;
+  color: $textColour;
 }
 
 .when,
@@ -12,18 +12,16 @@ body {
 .where {
   margin: 10px;
   padding: 5px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 6px;
   border: 0;
 }
-
 .where {
   width: 50%;
 }
 
 .outputBox {
-  background-color: #fdf7d8;
+  background-color: $backgroundColour;
   width: 100%;
   overflow: hidden;
 }
@@ -35,22 +33,21 @@ body {
 .btn {
   display: inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid #0c1b33;
+  border: 0.1em solid $textColour;
+  color: $textColour;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   text-decoration: none;
   font-weight: 300;
   text-align: center;
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
   width: 120px;
-}
-
-.btn:hover, .btn:active {
-  color: #fdf7d8;
-  background: #0c1b33;
+  &:hover,
+  &:active {
+    color: $backgroundColour;
+    background: $textColour;
+  }
 }
 
 @media all and (min-width: 30em) {
@@ -59,45 +56,41 @@ body {
     margin: 0.4em auto;
   }
 }
-
+// Start routine button
 .start {
   margin: 0.2em;
 }
-
+// Add to routine Button
 .add {
   margin: 0.2em;
   padding: 1em;
 }
-
+// Build Routine Button
 .build {
   margin-top: 4em;
 }
-
+// Done button is tasks component
 .doneTasks {
   position: fixed;
   bottom: 10vh;
   right: 35%;
   left: 35%;
 }
-
+// Container for start and add btns
 .btnContainer {
   position: fixed;
   bottom: 10vh;
   right: 10%;
   left: 10%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
-
+// container for info screen
 .container {
   display: block;
   margin: 30% 0 0 0;
 }
-
+// Text for headings
 .heading {
   font-size: xx-large;
   font-weight: 600;
@@ -119,19 +112,17 @@ body {
 
 .singleTask {
   margin-top: 45%;
-}
-
-.singleTask p {
-  font-size: 30px;
-  font-weight: 600;
-}
-
-.singleTask .timer {
-  margin: auto;
-  letter-spacing: 5px;
-  padding: 20px;
-  border: 1px solid black;
-  width: 50%;
+  p {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .timer {
+    margin: auto;
+    letter-spacing: 5px;
+    padding: 20px;
+    border: 1px solid black;
+    width: 50%;
+  }
 }
 
 .tasksContainer {
@@ -139,19 +130,13 @@ body {
 }
 
 .selectedTaskContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   top: 5%;
   height: 55vh;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: scroll;
+  // border: 1px black solid;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -161,10 +146,8 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .selectedTaskContainer {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .homeTextContainer {
@@ -186,4 +169,3 @@ body {
 .small {
   font-size: 12px;
 }
-/*# sourceMappingURL=App.css.map */

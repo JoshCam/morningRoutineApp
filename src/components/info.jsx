@@ -105,7 +105,7 @@ const Info = () => {
           ""
         )}
         <br></br>
-        <a className="btn" onClick={() => dispatch(updateScreen(1))}>
+        <a href="/#" className="btn" onClick={() => dispatch(updateScreen(1))}>
           Finished
         </a>
       </form>

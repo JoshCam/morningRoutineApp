@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateHomeCoords,
@@ -14,7 +14,7 @@ import moment from "moment";
 
 const Home = () => {
   const selectedTasks = useSelector((state) => state.selectedTasks.arr);
-  const posTasks = useSelector((state) => state.posTasks);
+  // const posTasks = useSelector((state) => state.posTasks);
   // console.log("tasks", selectedTasks);
   // userInfo
   const commute = useSelector((state) => state.userInfo.commute);
@@ -80,16 +80,21 @@ const Home = () => {
           <p>It Looks Like you haven't got any tasks!</p>
           <p>Start building your morning routine</p>
 
-          <a className="btn build" onClick={() => dispatch(updateScreen(2))}>
+          <a
+            href="/#"
+            className="btn build"
+            onClick={() => dispatch(updateScreen(2))}
+          >
             Build Your Routine
           </a>
         </div>
       ) : // Map over tasks in selected tasks
       selectedTasks.length > 0 ? (
         <div className="selectedTaskContainer">
-          {selectedTasks.map((task) => {
+          {selectedTasks.map((task, index) => {
             return (
               <p
+                key={index}
                 className="selectedTask"
                 // trying to add ability to remove from selected and add back to pos
                 onClick={() => {
@@ -125,10 +130,18 @@ const Home = () => {
           </div>
 
           <div className="btnContainer">
-            <a className="btn add" onClick={() => dispatch(updateScreen(2))}>
+            <a
+              href="/#"
+              className="btn add"
+              onClick={() => dispatch(updateScreen(2))}
+            >
               Add More
             </a>
-            <a className="btn start" onClick={() => dispatch(updateScreen(4))}>
+            <a
+              href="/#"
+              className="btn start"
+              onClick={() => dispatch(updateScreen(4))}
+            >
               Start Routine
             </a>
           </div>
