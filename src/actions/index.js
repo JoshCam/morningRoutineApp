@@ -15,6 +15,7 @@ export const updateWhen = (info) => {
 };
 export const updateCommute = (info) => {
   // Updates boolean from false to true if user commutes (If they do we auto get their home coords)
+  // console.log("commute action called");
   return {
     type: "GOT_COMMUTE",
     payload: info,

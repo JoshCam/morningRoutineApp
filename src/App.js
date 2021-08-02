@@ -2,6 +2,7 @@ import "./styles/App.css";
 import { useSelector } from "react-redux";
 
 // My Components
+import Login from "./components/Login";
 import Home from "./components/Home";
 import Info from "./components/Info";
 import Tasks from "./components/Tasks";
@@ -13,6 +14,7 @@ import RoutineTimer from "./components/RoutineTimer";
 // screen 2 is Task Select screen
 // Screen 3 is to start morning routine timer
 // Screen 4 is morning routine timer
+// Screen 5 is login screen
 
 function App() {
   const screen = useSelector((state) => state.screen);
@@ -28,6 +30,8 @@ function App() {
         <Routine />
       ) : screen === 4 ? (
         <RoutineTimer />
+      ) : screen === 5 ? (
+        <Login />
       ) : (
         "Error"
       )}

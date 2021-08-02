@@ -1,4 +1,4 @@
-const screenMode = (state = 0, action) => {
+const screenMode = (state = 5, action) => {
   switch (action.type) {
     case "UPDATE_SCREEN":
       return (state = action.payload);

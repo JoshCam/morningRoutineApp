@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateHomeCoords,
@@ -9,13 +9,12 @@ import {
 } from "../actions";
 
 import moment from "moment";
+import axios from "axios";
 
 // Screen that displays all selected tasks
 
 const Home = () => {
   const selectedTasks = useSelector((state) => state.selectedTasks.arr);
-  // const posTasks = useSelector((state) => state.posTasks);
-  // console.log("tasks", selectedTasks);
   // userInfo
   const commute = useSelector((state) => state.userInfo.commute);
   const when = useSelector((state) => state.userInfo.when);
@@ -26,7 +25,7 @@ const Home = () => {
   const home = useSelector((state) => state.userInfo.homeCoords);
   const dispatch = useDispatch();
 
-  // Turns 'when' input into integers - will probs put in a function later
+  // Turns 'when' input into integers
   let newStr = when.split("");
   newStr.splice(2, 1);
   newStr = newStr.join("");
@@ -40,36 +39,28 @@ const Home = () => {
     .subtract(time, "minutes")
     .format("h:mm");
 
-  if (commute) {
+  useEffect(() => {
     // Gets coordinates of users home if they commute
     // This is to later calculate their commute time
-    navigator.geolocation.getCurrentPosition((position) => {
-      const latlng = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      dispatch(updateHomeCoords(latlng));
-    });
-  }
-
-  if (home.lat) {
-    let googURL =
-      "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" +
-      home.lat +
-      "," +
-      home.lng +
-      "&destinations=" +
-      work.lat +
-      "," +
-      work.lng +
-      "&key=AIzaSyDvGymWobmXGa0CtbocnF1jwGt0AX9mkeM";
-
-    fetch(googURL)
-      .then((response) => response.json())
-      .then((data) =>
-        dispatch(updateDuration(data.rows[0].elements[0].duration.value))
-      );
-  }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latlng = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        axios
+          .post("http://localhost:6001/commute", { home: latlng, work: work })
+          .then((response) => {
+            console.log(">>>", response.data.data, "<<<");
+            dispatch(updateDuration(response.data.data));
+          });
+        dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   return (
     <div className="App">

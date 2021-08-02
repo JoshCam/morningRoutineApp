@@ -15,6 +15,7 @@ const userInfo = (state = initialState, action) => {
         when: action.payload,
       };
     case "GOT_COMMUTE":
+      // console.log("Commute reducer called");
       return {
         ...state,
         commute: action.payload,
