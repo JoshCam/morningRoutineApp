@@ -30,9 +30,9 @@ const posTasks = (state = initialState, action) => {
       return state;
     // Possible case to add task back to Pos tasks (remove from selected)
     case "ADD_TASK_TO_POS":
-      // console.log("tring to add task");
+      // Need to make this a set then back to an array to avoid dupes
       state = [...state, action.payload];
-      // console.log("pos", state);
+      state = Array.from(new Set(state.map(JSON.stringify))).map(JSON.parse);
       return state;
     default:
       return state;
