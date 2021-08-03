@@ -6,10 +6,12 @@ import {
   updateDuration,
   addTaskToPos,
   removeTaskFromSelected,
+  bulkUpdateSelected,
+  time,
 } from "../actions";
 
 import moment from "moment";
-import axios from "axios";
+import Axios from "axios";
 
 // Screen that displays all selected tasks
 
@@ -18,8 +20,7 @@ const Home = () => {
   // userInfo
   const when = useSelector((state) => state.userInfo.when);
 
-  const time = useSelector((state) => state.time);
-  console.log("time", time);
+  const length = useSelector((state) => state.time);
 
   const work = useSelector((state) => state.userInfo.coords);
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Home = () => {
   let wakeUp = moment()
     .hours(hour)
     .minutes(minute)
-    .subtract(time, "minutes")
+    .subtract(length, "minutes")
     .format("h:mm");
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Home = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        axios
+        Axios
           // sends request to the back to get travel time of commute
           .post("http://localhost:6001/commute", { home: latlng, work: work })
           .then((response) => {
@@ -59,6 +60,19 @@ const Home = () => {
         console.log(error);
       }
     );
+  }, []);
+
+  useEffect(async () => {
+    console.log("component mounted");
+    const results = await Axios.post("http://localhost:6001/get_tasks", {
+      token: localStorage.getItem("token"),
+    });
+    console.log(results.data.results);
+    dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
+    for (let i = 0; i < results.data.results.length; i++) {
+      // Adds each length component of each task to store
+      dispatch(time(results.data.results[i].length));
+    }
   }, []);
 
   return (
@@ -112,7 +126,7 @@ const Home = () => {
       {selectedTasks.length > 0 ? (
         <div className="homeInfoContainer">
           <div className="homeTextContainer">
-            <p>Your morning routine should take you {time} minutes</p>
+            <p>Your morning routine should take you {length} minutes</p>
             <p>That means if you want to start work on time</p>
             {/* <p>(and not have to rush)</p> */}
             <p>You'll need to wake up at {wakeUp}</p>
