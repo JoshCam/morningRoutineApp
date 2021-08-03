@@ -1,4 +1,5 @@
 const selectedTasks = (state = { arr: [] }, action) => {
+  // console.log(state);
   switch (action.type) {
     case "ADD_TASK_TO_SELECTED":
       // Adds tasks to selected tasks array - removes duplicates
@@ -13,6 +14,10 @@ const selectedTasks = (state = { arr: [] }, action) => {
           state.arr.splice(i, 1);
         }
       }
+      return state;
+    case "BULK_UPDATE_SELECTED":
+      state = { ...state, arr: action.payload };
+      // console.log(state);
       return state;
     default:
       return state;

@@ -52,6 +52,14 @@ export const updateDuration = (info) => {
   };
 };
 
+export const updateID = (info) => {
+  // Updates user ID
+  return {
+    type: "UPDATE_ID",
+    payload: info,
+  };
+};
+
 export const removeCommute = () => {
   // Remove commute from list of tasks if user said they dont commute!
   return {
@@ -71,6 +79,14 @@ export const removeTaskFromSelected = (task) => {
   // Remove a task from the selected Tasks
   return {
     type: "REMOVE_TASK_FROM_SELECTED",
+    payload: task,
+  };
+};
+
+export const bulkUpdateSelected = (task) => {
+  // Remove a task from the selected Tasks
+  return {
+    type: "BULK_UPDATE_SELECTED",
     payload: task,
   };
 };

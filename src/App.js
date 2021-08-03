@@ -20,6 +20,7 @@ function App() {
   const screen = useSelector((state) => state.screen);
   return (
     <div className="App">
+      <button onClick={() => localStorage.clear()}>Log Out</button>
       {screen === 0 ? (
         <Info />
       ) : screen === 1 ? (

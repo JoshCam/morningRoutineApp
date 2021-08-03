@@ -16,13 +16,12 @@ import axios from "axios";
 const Home = () => {
   const selectedTasks = useSelector((state) => state.selectedTasks.arr);
   // userInfo
-  const commute = useSelector((state) => state.userInfo.commute);
   const when = useSelector((state) => state.userInfo.when);
 
   const time = useSelector((state) => state.time);
+  console.log("time", time);
 
   const work = useSelector((state) => state.userInfo.coords);
-  const home = useSelector((state) => state.userInfo.homeCoords);
   const dispatch = useDispatch();
 
   // Turns 'when' input into integers
@@ -40,7 +39,7 @@ const Home = () => {
     .format("h:mm");
 
   useEffect(() => {
-    // Gets coordinates of users home if they commute
+    // Gets coordinates of users home
     // This is to later calculate their commute time
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -49,9 +48,9 @@ const Home = () => {
           lng: position.coords.longitude,
         };
         axios
+          // sends request to the back to get travel time of commute
           .post("http://localhost:6001/commute", { home: latlng, work: work })
           .then((response) => {
-            console.log(">>>", response.data.data, "<<<");
             dispatch(updateDuration(response.data.data));
           });
         dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally

@@ -5,6 +5,7 @@ let initialState = {
   coords: {}, //work
   homeCoords: {}, //Home
   duration: 0, // duration of travel time (commute) in seconds
+  user_id: 0, // Current users ID
 };
 
 const userInfo = (state = initialState, action) => {
@@ -15,7 +16,6 @@ const userInfo = (state = initialState, action) => {
         when: action.payload,
       };
     case "GOT_COMMUTE":
-      // console.log("Commute reducer called");
       return {
         ...state,
         commute: action.payload,
@@ -39,6 +39,11 @@ const userInfo = (state = initialState, action) => {
       return {
         ...state,
         duration: action.payload,
+      };
+    case "UPDATE_ID":
+      return {
+        ...state,
+        user_id: action.payload,
       };
     default:
       return state;

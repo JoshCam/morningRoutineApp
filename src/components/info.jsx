@@ -1,15 +1,19 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+
 import {
   updateScreen,
   updateWhen,
   updateCommute,
   updateWhere,
   updateCoords,
+  updateID,
 } from "../actions";
 
 // Screen that collects all user info
@@ -17,6 +21,8 @@ import {
 const Info = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
+  const user_id = useSelector((state) => state.userInfo.user_id);
+
   const dispatch = useDispatch();
 
   const [address, setAddress] = React.useState("");
@@ -31,6 +37,33 @@ const Info = () => {
     // console.log(value); //Address of work
     // console.log(latlng); //Coordinates of work
   };
+
+  let checkUser = (token) => {
+    // Gets the user ID from the token they received upon signing in
+    let config = {
+      headers: {
+        token: token,
+      },
+    };
+    // console.log
+    axios.get("http://localhost:6001/check_token", config).then((response) => {
+      // console.log(response.data); //Logs user Id
+      dispatch(updateID(response.data));
+    });
+  };
+  checkUser(localStorage.getItem("token"));
+
+  // let checkIfTasks = (userId) => {
+  //   // Retrives users tasks from the backend DB if they have any
+  //   let config = {
+  //     headers: { user_id: userId },
+  //   };
+
+  //   axios.get("http://localhost:6001/users_tasks", config).then((response) => {
+  //     console.log(response.data);
+  //   });
+  // };
+  // checkIfTasks(user_id);
 
   return (
     <div className="container">

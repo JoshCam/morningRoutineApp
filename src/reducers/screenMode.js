@@ -1,4 +1,11 @@
-const screenMode = (state = 5, action) => {
+const token = localStorage.getItem("token");
+let initialState = 5;
+
+if (token) {
+  initialState = 1;
+}
+
+const screenMode = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_SCREEN":
       return (state = action.payload);

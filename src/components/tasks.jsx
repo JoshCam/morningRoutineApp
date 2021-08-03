@@ -18,6 +18,7 @@ const Tasks = () => {
   }
 
   return (
+    // Displays individual tasks to be selected
     <div className="tasksContainer">
       <p className="heading">Choose your routine</p>
       {posTasks.map((task, index) => {

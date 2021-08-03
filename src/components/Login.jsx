@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { useDispatch } from "react-redux";
-import { updateScreen } from "../actions";
+import { bulkUpdateSelected, updateScreen, time } from "../actions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,8 @@ const Login = () => {
 
   const [loginStatus, setLoginStatus] = useState("");
 
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault();
     Axios.post("http://localhost:6001/register", {
       username: usernameReg,
       email: emailReg,
@@ -27,18 +28,27 @@ const Login = () => {
     });
   };
 
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:6001/login", {
+    const logInResults = await Axios.post("http://localhost:6001/login", {
       username: username,
       password: password,
-    }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-      } else {
-        dispatch(updateScreen(0));
-      }
     });
+
+    if (logInResults.data.loginSuccess === false) {
+      setLoginStatus("Wrong user name or password");
+    } else {
+      localStorage.setItem("token", logInResults.data.token);
+      dispatch(updateScreen(0));
+      const tasksResults = await Axios.post("http://localhost:6001/get_tasks", {
+        token: logInResults.data.token,
+      });
+      dispatch(bulkUpdateSelected(tasksResults.data.results)); // sends results to state
+      for (let i = 0; i < tasksResults.data.results.length; i++) {
+        // Adds each length component of each task to store
+        dispatch(time(tasksResults.data.results[i].length));
+      }
+    }
   };
 
   return (
@@ -56,7 +66,7 @@ const Login = () => {
           />
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -69,7 +79,7 @@ const Login = () => {
           </p>
         </form>
       ) : (
-        <div className="register">
+        <form className="register">
           {/* === REGISTER === */}
           <h1>Register</h1>
           <label>username</label>
@@ -99,7 +109,7 @@ const Login = () => {
           <p>
             Back to <span onClick={() => setIsRegister(false)}>Login</span>
           </p>
-        </div>
+        </form>
       )}
     </div>
   );
