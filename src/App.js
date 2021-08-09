@@ -49,7 +49,13 @@ function App() {
       )}
       {user_id > 0 ? (
         <div className="toolBar">
-          <div className="back" onClick={() => dispatch(updateScreen(1))}>
+          <div
+            className="back"
+            onClick={() => {
+              window.location.reload();
+              dispatch(updateScreen(1));
+            }}
+          >
             Home
           </div>
           <div className="userOptions">Options</div>

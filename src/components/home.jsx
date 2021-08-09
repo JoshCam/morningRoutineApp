@@ -4,8 +4,6 @@ import {
   updateHomeCoords,
   updateScreen,
   updateDuration,
-  addTaskToPos,
-  removeTaskFromSelected,
   bulkUpdateSelected,
   time,
   updateID,
@@ -15,6 +13,7 @@ import SelectedTask from "./SelectedTask";
 
 import moment from "moment";
 import Axios from "axios";
+import axios from "axios";
 
 // Screen that displays all selected tasks
 
@@ -24,11 +23,20 @@ const Home = () => {
   const when = useSelector((state) => state.userInfo.when);
   const work = useSelector((state) => state.userInfo.coords);
 
-  const length = useSelector((state) => state.time);
+  // const length = useSelector((state) => state.time);
 
   const user_id = useSelector((state) => state.userInfo.user_id);
 
   const dispatch = useDispatch();
+
+  const [length, setLength] = useState(0);
+
+  useEffect(async () => {
+    console.log("Run");
+    const length = await axios.get(`http://localhost:6001/get_time/${user_id}`);
+    console.log("length", length.data[0].length);
+    setLength(length.data[0].length);
+  });
 
   // Turns 'when' input into integers
   let newStr = when.split("");
@@ -92,20 +100,6 @@ const Home = () => {
     dispatch(updateID(userID.data));
   });
 
-  let removeTaskFromDB = (task) => {
-    console.log("task removed");
-    console.log(task, user_id);
-    Axios.post("http://localhost:6001/remove_task", {
-      task: task.task,
-      user_id,
-    });
-  };
-  // Text colour of tasks - used to update colour on click
-  // to indicate the task will/has been removed
-  // At the moment the colour gets set for all of them - to fix this
-  // I think i need to put each task in their own component
-  const [textColour, setTextColour] = useState("#0c1b33");
-
   return (
     <div className="App">
       {/* If no tasks selected display this */}
@@ -127,29 +121,7 @@ const Home = () => {
       selectedTasks.length > 0 ? (
         <div className="selectedTaskContainer">
           {selectedTasks.map((task, index) => {
-            return (
-              <p
-                style={{ color: textColour }}
-                key={index}
-                className="selectedTask"
-                // trying to add ability to remove from selected and add back to pos
-                onClick={() => {
-                  dispatch(
-                    addTaskToPos({ task: task.task, length: task.length })
-                  );
-                  dispatch(
-                    removeTaskFromSelected({
-                      task: task.task,
-                      length: task.length,
-                    })
-                  );
-                  removeTaskFromDB({ task: task.task });
-                }}
-              >
-                {task.task}
-                {/* <SelectedTask task={task.task} /> */}
-              </p>
-            );
+            return <SelectedTask key={index} task={task} />;
           })}
         </div>
       ) : (
@@ -192,15 +164,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// () => {
-//   dispatch(addTaskToPos({ task: task.task, length: task.length }));
-// },
-//   () => {
-//     dispatch(
-//       removeTaskFromSelected({
-//         task: task.task,
-//         length: task.length,
-//       })
-//     );
-//   };
