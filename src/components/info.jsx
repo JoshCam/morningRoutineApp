@@ -53,18 +53,6 @@ const Info = () => {
   };
   checkUser(localStorage.getItem("token"));
 
-  // let checkIfTasks = (userId) => {
-  //   // Retrives users tasks from the backend DB if they have any
-  //   let config = {
-  //     headers: { user_id: userId },
-  //   };
-
-  //   axios.get("http://localhost:6001/users_tasks", config).then((response) => {
-  //     console.log(response.data);
-  //   });
-  // };
-  // checkIfTasks(user_id);
-
   return (
     <div className="container">
       <h1>Info</h1>

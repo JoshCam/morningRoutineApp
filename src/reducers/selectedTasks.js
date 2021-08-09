@@ -16,14 +16,16 @@ const selectedTasks = (state = { arr: [] }, action) => {
       }
       return state;
     case "BULK_UPDATE_SELECTED":
-      if (action.payload[0].task === null) {
-        // Back end returns null when no tasks are found, this stops null getting added to state
-        return state;
-      } else {
-        state = { ...state, arr: action.payload };
-        return state;
+      if (action.payload.length > 0) {
+        if (action.payload[0].task === null) {
+          // Back end returns null when no tasks are found, this stops null getting added to state
+          return state;
+        } else {
+          state = { ...state, arr: action.payload };
+          return state;
+        }
       }
-    // console.log(state);
+      return state;
     default:
       return state;
   }

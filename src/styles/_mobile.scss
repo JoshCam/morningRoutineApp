@@ -169,3 +169,26 @@ body {
 .small {
   font-size: 12px;
 }
+
+.toolBar {
+  display: flex;
+  height: 40px;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  justify-content: space-evenly;
+  right: 0%;
+  .back {
+    position: relative;
+    border: solid black 1px;
+    width: 100%;
+    padding: 0.5em;
+  }
+  .userOptions {
+    position: relative;
+    border: solid black 1px;
+    border-left: none;
+    width: 100%;
+    padding: 0.5em;
+  }
+}

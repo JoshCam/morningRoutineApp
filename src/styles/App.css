@@ -1,3 +1,8 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
 @media (min-width: 601px) {
   * {
     font-family: "Poppins", sans-serif;
@@ -331,6 +336,32 @@
   }
   .small {
     font-size: 12px;
+  }
+  .toolBar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    right: 0%;
+  }
+  .toolBar .back {
+    position: relative;
+    border: solid black 1px;
+    width: 100%;
+    padding: 0.5em;
+  }
+  .toolBar .userOptions {
+    position: relative;
+    border: solid black 1px;
+    border-left: none;
+    width: 100%;
+    padding: 0.5em;
   }
 }
 /*# sourceMappingURL=App.css.map */

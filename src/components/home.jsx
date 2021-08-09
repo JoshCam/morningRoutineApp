@@ -8,6 +8,7 @@ import {
   removeTaskFromSelected,
   bulkUpdateSelected,
   time,
+  updateID,
 } from "../actions";
 
 import moment from "moment";
@@ -19,10 +20,12 @@ const Home = () => {
   const selectedTasks = useSelector((state) => state.selectedTasks.arr);
   // userInfo
   const when = useSelector((state) => state.userInfo.when);
+  const work = useSelector((state) => state.userInfo.coords);
 
   const length = useSelector((state) => state.time);
 
-  const work = useSelector((state) => state.userInfo.coords);
+  const user_id = useSelector((state) => state.userInfo.user_id);
+
   const dispatch = useDispatch();
 
   // Turns 'when' input into integers
@@ -76,8 +79,24 @@ const Home = () => {
     }
   }, []);
 
-  let removeTaskFromDB = () => {
+  useEffect(async () => {
+    // Sets user ID in state using token if page has been refreshed
+    let config = {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    const userID = await Axios.get("http://localhost:6001/check_token", config);
+    dispatch(updateID(userID.data));
+  });
+
+  let removeTaskFromDB = (task) => {
     console.log("task removed");
+    console.log(task, user_id);
+    Axios.post("http://localhost:6001/remove_task", {
+      task: task.task,
+      user_id,
+    });
   };
 
   return (
@@ -116,7 +135,7 @@ const Home = () => {
                       length: task.length,
                     })
                   );
-                  removeTaskFromDB();
+                  removeTaskFromDB({ task: task.task });
                 }}
               >
                 {task.task}
