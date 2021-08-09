@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateHomeCoords,
@@ -10,6 +10,8 @@ import {
   time,
   updateID,
 } from "../actions";
+
+import SelectedTask from "./SelectedTask";
 
 import moment from "moment";
 import Axios from "axios";
@@ -98,6 +100,11 @@ const Home = () => {
       user_id,
     });
   };
+  // Text colour of tasks - used to update colour on click
+  // to indicate the task will/has been removed
+  // At the moment the colour gets set for all of them - to fix this
+  // I think i need to put each task in their own component
+  const [textColour, setTextColour] = useState("#0c1b33");
 
   return (
     <div className="App">
@@ -122,6 +129,7 @@ const Home = () => {
           {selectedTasks.map((task, index) => {
             return (
               <p
+                style={{ color: textColour }}
                 key={index}
                 className="selectedTask"
                 // trying to add ability to remove from selected and add back to pos
@@ -139,6 +147,7 @@ const Home = () => {
                 }}
               >
                 {task.task}
+                {/* <SelectedTask task={task.task} /> */}
               </p>
             );
           })}

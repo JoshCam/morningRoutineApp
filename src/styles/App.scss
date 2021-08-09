@@ -4,11 +4,6 @@ $textColour: #0c1b33;
 // All styles in this file are for phone, below is desktop
 // Similar but just a bit better for wider screens
 
-html {
-  margin: 0;
-  padding: 0;
-}
-
 // desktop
 @media (min-width: 601px) {
   @import "desktop";
