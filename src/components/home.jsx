@@ -63,17 +63,22 @@ const Home = () => {
   }, []);
 
   useEffect(async () => {
+    // Sends token from local storage to backend and receives the users saved tasks as a response
     console.log("component mounted");
     const results = await Axios.post("http://localhost:6001/get_tasks", {
       token: localStorage.getItem("token"),
     });
-    console.log(results.data.results);
+    // Adds data(tasks) received from back end to state in bulk
     dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
     for (let i = 0; i < results.data.results.length; i++) {
       // Adds each length component of each task to store
       dispatch(time(results.data.results[i].length));
     }
   }, []);
+
+  let removeTaskFromDB = () => {
+    console.log("task removed");
+  };
 
   return (
     <div className="App">
@@ -111,6 +116,7 @@ const Home = () => {
                       length: task.length,
                     })
                   );
+                  removeTaskFromDB();
                 }}
               >
                 {task.task}
