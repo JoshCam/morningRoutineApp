@@ -151,18 +151,20 @@ const Home = () => {
   // }, []);
 
   useEffect(async () => {
-    // I think the setting of user_id by the above func is async so this has to listen
-    // a change in user_id to be able to send the correct one to the back
+    // gets users work location and when they start work from the back
     const userInfo = await axios.get(
       `http://localhost:6001/get_user_info/${user_id}`
     );
+    if (userInfo.data.length == 0) return;
+
+    console.log("USER INFO RES", userInfo.data[0].work_lat);
+
     const work = {
       lat: userInfo.data[0].work_lat,
       lng: userInfo.data[0].work_lng,
     };
     dispatch(updateCoords(work));
     dispatch(updateWhen(userInfo.data[0].start_work));
-    // console.log(work);
   }, [user_id]);
 
   return (

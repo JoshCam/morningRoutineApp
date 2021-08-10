@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
 
-import { addTask, posTask, time } from "../actions";
+import { addTask, posTask } from "../actions";
 
 const TaskCard = (props) => {
   const user_id = useSelector((state) => state.userInfo.user_id);
