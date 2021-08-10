@@ -14,7 +14,6 @@ const TaskCard = (props) => {
   let handleClick = () => {
     dispatch(addTask({ task: props.task, length: props.time })); // Adds task to selectedTasks
     dispatch(posTask(props.task)); //Removes task from list of possible tasks
-    // dispatch(time(props.time)); // Adds time to the routine
     setTextColour("#3F7C8D"); //Change text colour to make clear task is selected
     axios.post("http://localhost:6001/add_task", {
       //Sends selected tasks to database

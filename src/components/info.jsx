@@ -22,6 +22,7 @@ const Info = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
   const user_id = useSelector((state) => state.userInfo.user_id);
+  const work = useSelector((state) => state.userInfo.coords);
 
   const dispatch = useDispatch();
 
@@ -52,6 +53,20 @@ const Info = () => {
     });
   };
   checkUser(localStorage.getItem("token"));
+
+  let addInfoToDB = () => {
+    axios.post("http://localhost:6001/add_user_info", {
+      user_id,
+      start_work: when,
+      work_location: work,
+    });
+    console.log("called add info");
+  };
+
+  let handleClick = () => {
+    dispatch(updateScreen(1));
+    addInfoToDB();
+  };
 
   return (
     <div className="container">
@@ -126,7 +141,7 @@ const Info = () => {
           ""
         )}
         <br></br>
-        <a href="/#" className="btn" onClick={() => dispatch(updateScreen(1))}>
+        <a href="/#" className="btn" onClick={() => handleClick()}>
           Finished
         </a>
       </form>
