@@ -32,14 +32,6 @@ const Home = () => {
 
   const [length, setLength] = useState(0); //Total time all tasks will take
 
-  useEffect(async () => {
-    if (user_id === 0) return;
-    // Gets total time of users routine
-    const length = await axios.get(`http://localhost:6001/get_time/${user_id}`);
-    // console.log("length", length.data[0].length);
-    setLength(length.data[0].length);
-  }, [user_id]);
-
   // Turns 'when' input into integers
   let newStr = when.split("");
   newStr.splice(2, 1);
@@ -54,118 +46,86 @@ const Home = () => {
     .subtract(length, "minutes")
     .format("h:mm");
 
-  useEffect(async () => {
-    // Gets coordinates of users home
-    // This is to later calculate their commute time
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const latlng = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
+  useEffect(() => {
+    (async function fetchData() {
+      // ### USE EFFECT FOR ROUTINE TIME & WORK COORDS/WORK START TIME###
+      //
+      // Gets total time of users routine
+      if (user_id === 0) return;
+      const length = await axios.get(
+        `http://localhost:6001/get_time/${user_id}`
+      );
+      setLength(length.data[0].length);
 
-        // Sends home and work co-ordinates to backend to get travel time
-        const travelTime = await axios.post("http://localhost:6001/commute", {
-          home: latlng,
-          work: work,
+      //
+      // gets users work location and when they start work
+      const userInfo = await axios.get(
+        `http://localhost:6001/get_user_info/${user_id}`
+      );
+
+      if (userInfo.data.length === 0) return; // If there is no userInfo then skip the next step
+      const work = {
+        lat: userInfo.data[0].work_lat,
+        lng: userInfo.data[0].work_lng,
+      };
+      dispatch(updateCoords(work)); //Update local store with work location
+      dispatch(updateWhen(userInfo.data[0].start_work)); //Update local store with users start time
+    })();
+  }, [user_id, dispatch]);
+
+  useEffect(() => {
+    (async function fetchData() {
+      // Gets coordinates of users home
+      // This is to later calculate their commute time
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const latlng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          // Sends home and work co-ordinates to backend to get travel time from google
+          const travelTime = await axios.post("http://localhost:6001/commute", {
+            home: latlng,
+            work: work, //Work coords comes from the store which comes from the back end
+          });
+          dispatch(updateDuration(travelTime.data.data)); //update local store with users commute time
+          dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally (Home Coordinates)
         });
-
-        dispatch(updateDuration(travelTime.data.data));
-        dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally
-      },
-      (error) => {
-        // console.log(error);
+      } else {
+        // if browser doesn't support geolocation send alert
+        alert(
+          `Your browser is either blocking or doesn't have geolocation
+         - some features of this app will be missing`
+        );
       }
-    );
-    //
-    // Sends token from local storage to backend and receives the users saved tasks as a response
-    //
-    const results = await axios.post("http://localhost:6001/get_tasks", {
-      token: localStorage.getItem("token"),
-    });
-    // Adds data(tasks) received from back end to state in bulk
-    dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
-    for (let i = 0; i < results.data.results.length; i++) {
-      // Adds each length component of each task to store
-      dispatch(time(results.data.results[i].length));
-    }
-    //
-    // Sets user ID in state using token if page has been refreshed
-    //
-    let config = {
-      headers: {
+      //
+      // Sends token from local storage to backend and receives the users saved tasks as a response
+      //
+      const results = await axios.post("http://localhost:6001/get_tasks", {
         token: localStorage.getItem("token"),
-      },
-    };
-    const userID = await axios.get("http://localhost:6001/check_token", config);
-    dispatch(updateID(userID.data));
-  }, []);
-
-  // useEffect(() => {
-  //   // Gets coordinates of users home
-  //   // This is to later calculate their commute time
-  //   navigator.geolocation.getCurrentPosition(
-  //     async (position) => {
-  //       const latlng = {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude,
-  //       };
-
-  //       const travelTime = await axios.post("http://localhost:6001/commute", {
-  //         home: latlng,
-  //         work: work,
-  //       });
-
-  //       dispatch(updateDuration(travelTime.data.data));
-  //       dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally
-  //     },
-  //     (error) => {
-  //       // console.log(error);
-  //     }
-  //   );
-  // }, []);
-
-  // useEffect(async () => {
-  //   // Sends token from local storage to backend and receives the users saved tasks as a response
-  //   const results = await axios.post("http://localhost:6001/get_tasks", {
-  //     token: localStorage.getItem("token"),
-  //   });
-  //   console.log(results);
-  //   // Adds data(tasks) received from back end to state in bulk
-  //   dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
-  //   for (let i = 0; i < results.data.results.length; i++) {
-  //     // Adds each length component of each task to store
-  //     dispatch(time(results.data.results[i].length));
-  //   }
-  // }, []);
-
-  // useEffect(async () => {
-  //   // Sets user ID in state using token if page has been refreshed
-  //   let config = {
-  //     headers: {
-  //       token: localStorage.getItem("token"),
-  //     },
-  //   };
-  //   const userID = await axios.get("http://localhost:6001/check_token", config);
-  //   dispatch(updateID(userID.data));
-  // }, []);
-
-  useEffect(async () => {
-    // gets users work location and when they start work from the back
-    const userInfo = await axios.get(
-      `http://localhost:6001/get_user_info/${user_id}`
-    );
-    if (userInfo.data.length == 0) return;
-
-    console.log("USER INFO RES", userInfo.data[0].work_lat);
-
-    const work = {
-      lat: userInfo.data[0].work_lat,
-      lng: userInfo.data[0].work_lng,
-    };
-    dispatch(updateCoords(work));
-    dispatch(updateWhen(userInfo.data[0].start_work));
-  }, [user_id]);
+      });
+      // Adds data(tasks) received from back end to state in bulk
+      dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
+      for (let i = 0; i < results.data.results.length; i++) {
+        // Adds each length component of each task to store
+        dispatch(time(results.data.results[i].length));
+      }
+      //
+      // Sets user ID in state using token if page has been refreshed
+      //
+      let config = {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      };
+      const userID = await axios.get(
+        "http://localhost:6001/check_token",
+        config
+      );
+      dispatch(updateID(userID.data));
+    })();
+  }, [dispatch, work]);
 
   return (
     <div className="App">

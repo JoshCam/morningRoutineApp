@@ -1,4 +1,5 @@
 import "./styles/App.css";
+import React from "react";
 
 // My Components
 import Login from "./components/Login";
@@ -7,6 +8,7 @@ import Info from "./components/Info";
 import Tasks from "./components/Tasks";
 import Routine from "./components/Routine";
 import RoutineTimer from "./components/RoutineTimer";
+import UpdateInfo from "./components/UpdateInfo";
 
 import { updateScreen } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,17 +19,31 @@ import { useSelector, useDispatch } from "react-redux";
 // Screen 3 is to start morning routine timer
 // Screen 4 is morning routine timer
 // Screen 5 is login screen
+// Screen 6 is update Info Screen
 
 function App() {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.screen);
   const user_id = useSelector((state) => state.userInfo.user_id);
 
+  const myRef = React.useRef();
+
   let logOut = () => {
     localStorage.clear();
     dispatch(updateScreen(5));
     window.location.reload();
   };
+
+  function navFunc() {
+    var x = myRef.current;
+    console.log(x);
+    if (x.style.display === "block") {
+      // If "MyLinks"
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
 
   return (
     <div className="App">
@@ -44,21 +60,39 @@ function App() {
         <RoutineTimer />
       ) : screen === 5 ? (
         <Login />
+      ) : screen === 6 ? (
+        <UpdateInfo />
       ) : (
         "Error"
       )}
-      {user_id > 0 ? (
-        <div className="toolBar">
-          <div
-            className="back"
+      {user_id > 0 ? ( //Checks if a user is logged in then displays nav bar
+        // <!-- Top Navigation Menu -->
+        <div className="topnav">
+          <a
+            href="#home"
+            className="home"
             onClick={() => {
               window.location.reload();
               dispatch(updateScreen(1));
             }}
           >
             Home
+          </a>
+
+          {/* <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links --> */}
+          <a href="/#" className="options" onClick={() => navFunc()}>
+            Options
+          </a>
+
+          {/* <!-- Navigation links (hidden by default) --> */}
+          <div id="myLinks" ref={myRef}>
+            <a href="#info" onClick={() => dispatch(updateScreen(6))}>
+              Update Your Info
+            </a>
+            <a href="#logout" onClick={() => logOut()}>
+              log Out
+            </a>
           </div>
-          <div className="userOptions">Options</div>
         </div>
       ) : (
         ""
