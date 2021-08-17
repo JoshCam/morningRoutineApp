@@ -9,6 +9,7 @@ import {
   updateID,
   updateCoords,
   updateWhen,
+  updateCommute,
 } from "../actions";
 
 import SelectedTask from "./SelectedTask";
@@ -23,6 +24,7 @@ const Home = () => {
   // userInfo
   const when = useSelector((state) => state.userInfo.when);
   const work = useSelector((state) => state.userInfo.coords);
+  const commute = useSelector((state) => state.userInfo.commute);
 
   // const length = useSelector((state) => state.time);
 
@@ -125,7 +127,11 @@ const Home = () => {
       );
       dispatch(updateID(userID.data));
     })();
-  }, [dispatch, work]);
+
+    if (work.lat) {
+      dispatch(updateCommute(true));
+    }
+  }, [dispatch, work, commute]);
 
   return (
     <div className="App">
