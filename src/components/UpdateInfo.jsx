@@ -35,28 +35,12 @@ const UpdateInfo = () => {
     dispatch(updateCoords(latlng));
   };
 
-  // let checkUser = (token) => {
-  //   // Gets the user ID from the token they received upon signing in
-  //   let config = {
-  //     headers: {
-  //       token: token,
-  //     },
-  //   };
-  //   axios
-  //     .get("http://localhost:6001/check_token", config)
-  //     .then((response) => {
-  //       dispatch(updateID(response.data));
-  //     });
-  // };
-  // checkUser(localStorage.getItem("token"));
-
   let updateUserInfo = () => {
-    axios.put("http://localhost:6001/update_user_info", {
+    axios.put("https://morning-routine-jc.herokuapp.com/update_user_info", {
       user_id,
       start_work: when,
       work_location: work,
     });
-    console.log("called add info");
   };
 
   let handleClick = () => {

@@ -15,7 +15,7 @@ const TaskCard = (props) => {
     dispatch(addTask({ task: props.task, length: props.time })); // Adds task to selectedTasks
     dispatch(posTask(props.task)); //Removes task from list of possible tasks
     setTextColour("#3F7C8D"); //Change text colour to make clear task is selected
-    axios.post("http://localhost:6001/add_task", {
+    axios.post("https://morning-routine-jc.herokuapp.com/add_task", {
       //Sends selected tasks to database
       user_id: user_id,
       task: props.task,

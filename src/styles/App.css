@@ -164,6 +164,46 @@
   .small {
     font-size: 12px;
   }
+  /* Style the navigation menu */
+  .topnav {
+    background-color: #ffe677;
+    position: fixed;
+    bottom: 0%;
+    height: 55px;
+    width: 100%;
+    right: 0%;
+  }
+  .topnav .home {
+    display: block;
+    width: 50%;
+    background-color: #ffe677;
+    color: black;
+  }
+  .topnav .options {
+    background-color: #ffe677;
+    display: block;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav #myLinks {
+    display: none;
+    position: relative;
+    bottom: +160px;
+    background-color: #ffe677;
+  }
+  .topnav a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+  }
+  .topnav a:hover {
+    background-color: #ffe057;
+    color: black;
+  }
 }
 
 @media (max-width: 600px) {

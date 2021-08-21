@@ -55,14 +55,14 @@ const Home = () => {
       // Gets total time of users routine
       if (user_id === 0) return;
       const length = await axios.get(
-        `http://localhost:6001/get_time/${user_id}`
+        `https://morning-routine-jc.herokuapp.com/get_time/${user_id}`
       );
       setLength(length.data[0].length);
 
       //
       // gets users work location and when they start work
       const userInfo = await axios.get(
-        `http://localhost:6001/get_user_info/${user_id}`
+        `https://morning-routine-jc.herokuapp.com/get_user_info/${user_id}`
       );
 
       if (userInfo.data.length === 0) return; // If there is no userInfo then skip the next step
@@ -87,10 +87,13 @@ const Home = () => {
           };
 
           // Sends home and work co-ordinates to backend to get travel time from google
-          const travelTime = await axios.post("http://localhost:6001/commute", {
-            home: latlng,
-            work: work, //Work coords comes from the store which comes from the back end
-          });
+          const travelTime = await axios.post(
+            "https://morning-routine-jc.herokuapp.com/commute",
+            {
+              home: latlng,
+              work: work, //Work coords comes from the store which comes from the back end
+            }
+          );
           dispatch(updateDuration(travelTime.data.data)); //update local store with users commute time
           dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally (Home Coordinates)
         });
@@ -104,9 +107,12 @@ const Home = () => {
       //
       // Sends token from local storage to backend and receives the users saved tasks as a response
       //
-      const results = await axios.post("http://localhost:6001/get_tasks", {
-        token: localStorage.getItem("token"),
-      });
+      const results = await axios.post(
+        "https://morning-routine-jc.herokuapp.com/get_tasks",
+        {
+          token: localStorage.getItem("token"),
+        }
+      );
       // Adds data(tasks) received from back end to state in bulk
       dispatch(bulkUpdateSelected(results.data.results)); // sends results to state
       for (let i = 0; i < results.data.results.length; i++) {
@@ -122,12 +128,13 @@ const Home = () => {
         },
       };
       const userID = await axios.get(
-        "http://localhost:6001/check_token",
+        "https://morning-routine-jc.herokuapp.com/check_token",
         config
       );
       dispatch(updateID(userID.data));
     })();
-
+    //
+    // Update "commute" to true if "work" had any data
     if (work.lat) {
       dispatch(updateCommute(true));
     }

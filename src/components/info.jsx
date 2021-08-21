@@ -47,15 +47,17 @@ const Info = () => {
       },
     };
     // console.log
-    axios.get("http://localhost:6001/check_token", config).then((response) => {
-      // console.log(response.data); //Logs user Id
-      dispatch(updateID(response.data));
-    });
+    axios
+      .get("https://morning-routine-jc.herokuapp.com/check_token", config)
+      .then((response) => {
+        // console.log(response.data); //Logs user Id
+        dispatch(updateID(response.data));
+      });
   };
   checkUser(localStorage.getItem("token"));
 
   let addInfoToDB = () => {
-    axios.post("http://localhost:6001/add_user_info", {
+    axios.post("https://morning-routine-jc.herokuapp.com/add_user_info", {
       user_id,
       start_work: when,
       work_location: work,

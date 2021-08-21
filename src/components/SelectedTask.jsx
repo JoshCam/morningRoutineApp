@@ -11,7 +11,7 @@ const SelectedTask = (props) => {
 
   let removeTaskFromDB = (task) => {
     //   Removes selected task from tasks DB
-    Axios.post("http://localhost:6001/remove_task", {
+    Axios.post("https://morning-routine-jc.herokuapp.com/remove_task", {
       task: task.task,
       user_id,
     });

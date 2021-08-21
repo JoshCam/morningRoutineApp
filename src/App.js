@@ -38,7 +38,6 @@ function App() {
     var x = myRef.current;
     console.log(x);
     if (x.style.display === "block") {
-      // If "MyLinks"
       x.style.display = "none";
     } else {
       x.style.display = "block";
@@ -47,7 +46,6 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => logOut()}>Log Out</button>
       {screen === 0 ? (
         <Info />
       ) : screen === 1 ? (
