@@ -5,6 +5,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+
 import axios from "axios";
 
 import {
@@ -13,12 +14,9 @@ import {
   updateCommute,
   updateWhere,
   updateCoords,
-  updateID,
 } from "../actions";
 
-// Screen that collects all user info
-
-const Info = () => {
+const UpdateInfo = () => {
   const when = useSelector((state) => state.userInfo.when);
   const commute = useSelector((state) => state.userInfo.commute);
   const user_id = useSelector((state) => state.userInfo.user_id);
@@ -35,44 +33,24 @@ const Info = () => {
     setAddress(value);
     dispatch(updateWhere(value));
     dispatch(updateCoords(latlng));
-    // console.log(value); //Address of work
-    // console.log(latlng); //Coordinates of work
   };
 
-  let checkUser = (token) => {
-    // Gets the user ID from the token they received upon signing in
-    let config = {
-      headers: {
-        token: token,
-      },
-    };
-    // console.log
-    axios
-      .get("https://morning-routine-jc.herokuapp.com/check_token", config)
-      .then((response) => {
-        // console.log(response.data); //Logs user Id
-        dispatch(updateID(response.data));
-      });
-  };
-  checkUser(localStorage.getItem("token"));
-
-  let addInfoToDB = () => {
-    axios.post("https://morning-routine-jc.herokuapp.com/add_user_info", {
+  let updateUserInfo = () => {
+    axios.put("https://morning-routine-jc.herokuapp.com/update_user_info", {
       user_id,
       start_work: when,
       work_location: work,
     });
-    console.log("called add info");
   };
 
   let handleClick = () => {
     dispatch(updateScreen(1));
-    addInfoToDB();
+    updateUserInfo();
   };
 
   return (
-    <div className="container">
-      <h1>Info</h1>
+    <div>
+      <p>Update Your morning Info below:</p>
       <form>
         <label>When do you start work in the morning?</label>
         <br></br>
@@ -151,4 +129,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default UpdateInfo;

@@ -5,7 +5,7 @@ let initialState = {
   coords: {}, //work
   homeCoords: {}, //Home
   duration: 0, // duration of travel time (commute) in seconds
-  user_id: 0, // Current users ID
+  user_id: null, // Current users ID
 };
 
 const userInfo = (state = initialState, action) => {

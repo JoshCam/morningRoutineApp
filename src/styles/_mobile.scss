@@ -193,3 +193,49 @@ body {
     padding: 0.5em;
   }
 }
+
+// NAV
+/* Style the navigation menu */
+.topnav {
+  // overflow: hidden;
+  background-color: rgb(255, 230, 119);
+  position: fixed;
+  bottom: 0%;
+  height: 55px;
+  width: 100%;
+  right: 0%;
+  .home {
+    // Home link
+    display: block;
+    width: 50%;
+    background-color: rgb(255, 230, 119);
+    color: rgb(0, 0, 0);
+  }
+  .options {
+    // options link
+    background-color: rgb(255, 230, 119);
+    display: block;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  #myLinks {
+    // Hide the links inside the navigation menu (except for logo/home)
+    display: none;
+    position: relative;
+    bottom: +160px;
+    background-color: rgb(255, 230, 119);
+  }
+  a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    &:hover {
+      background-color: rgb(255, 224, 87);
+      color: black;
+    }
+  }
+}
