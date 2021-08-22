@@ -36,7 +36,6 @@ function App() {
 
   function navFunc() {
     var x = myRef.current;
-    console.log(x);
     if (x.style.display === "block") {
       x.style.display = "none";
     } else {

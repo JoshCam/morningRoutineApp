@@ -18,6 +18,7 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
 
   const register = (e) => {
+    e.preventDefault();
     axios
       .post("https://morning-routine-jc.herokuapp.com/register", {
         username: usernameReg,
@@ -27,6 +28,7 @@ const Login = () => {
       .then((response) => {
         console.log(response);
       });
+    window.location.reload();
   };
 
   const login = async (e) => {
