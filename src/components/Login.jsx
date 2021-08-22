@@ -17,11 +17,17 @@ const Login = () => {
 
   const [loginStatus, setLoginStatus] = useState("");
 
+  const test = axios.get(
+    "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks"
+  );
+
+  console.log(test);
+
   const register = (e) => {
     e.preventDefault();
     axios
       .post(
-        "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/register",
+        "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/register",
         {
           username: usernameReg,
           email: emailReg,
@@ -36,7 +42,7 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     const logInResults = await axios.post(
-      "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/login",
+      "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/login",
       {
         username: username,
         password: password,
@@ -63,6 +69,12 @@ const Login = () => {
       }
     }
   };
+
+  const test = axios.get(
+    "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks"
+  );
+
+  console.log(test);
 
   // const checkIfUserInfo = async () => {
   //   let config = {
