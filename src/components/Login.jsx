@@ -18,7 +18,7 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
 
   const test = axios.get(
-    "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks"
+    "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/test"
   );
 
   console.log(test);
