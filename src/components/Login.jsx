@@ -17,23 +17,18 @@ const Login = () => {
 
   const [loginStatus, setLoginStatus] = useState("");
 
-  const test = axios.get(
-    "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks"
-  );
+  const test = axios.get("https://morning-routine-jc.herokuapp.com/get_tasks");
 
   console.log(test);
 
   const register = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/register",
-        {
-          username: usernameReg,
-          email: emailReg,
-          password: passwordReg,
-        }
-      )
+      .post("https://morning-routine-jc.herokuapp.com/register", {
+        username: usernameReg,
+        email: emailReg,
+        password: passwordReg,
+      })
       .then((response) => {
         console.log(response);
       });
@@ -71,6 +66,8 @@ const Login = () => {
   };
 
   // const checkIfUserInfo = async () => {
+  //   // This is a WIP - the idea is we send the user to the home screen if we have their info
+  //   // if we dont we send them to the info screen
   //   let config = {
   //     headers: {
   //       token: localStorage.getItem("token"),
