@@ -17,14 +17,7 @@ const Login = () => {
 
   const [loginStatus, setLoginStatus] = useState("");
 
-  const test = axios.get(
-    "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/test"
-  );
-
-  console.log(test);
-
   const register = (e) => {
-    e.preventDefault();
     axios
       .post("https://morning-routine-jc.herokuapp.com/register", {
         username: usernameReg,
