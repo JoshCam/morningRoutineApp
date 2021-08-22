@@ -70,10 +70,6 @@ const Login = () => {
     }
   };
 
-  const test = axios.get("https://morning-routine-jc.herokuapp.com/get_tasks");
-
-  console.log(test);
-
   // const checkIfUserInfo = async () => {
   //   let config = {
   //     headers: {
