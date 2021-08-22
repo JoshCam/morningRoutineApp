@@ -42,7 +42,7 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     const logInResults = await axios.post(
-      "https://cors-proxy-joshc.herokuapp.com/https://morning-routine-jc.herokuapp.com/login",
+      "https://morning-routine-jc.herokuapp.com/login",
       {
         username: username,
         password: password,
@@ -57,7 +57,7 @@ const Login = () => {
       dispatch(updateScreen(0));
       // await checkIfUserInfo();
       const tasksResults = await axios.post(
-        "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks",
+        "https://morning-routine-jc.herokuapp.com/get_tasks",
         {
           token: logInResults.data.token,
         }
@@ -70,9 +70,7 @@ const Login = () => {
     }
   };
 
-  const test = axios.get(
-    "https://cors-anywhere.herokuapp.com/https://morning-routine-jc.herokuapp.com/get_tasks"
-  );
+  const test = axios.get("https://morning-routine-jc.herokuapp.com/get_tasks");
 
   console.log(test);
 
