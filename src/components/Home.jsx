@@ -94,7 +94,6 @@ const Home = () => {
               work: work, //Work coords comes from the store which comes from the back end
             }
           );
-          console.log("TRAVEL TIME", travelTime.data.data);
           dispatch(updateDuration(travelTime.data.data)); //update local store with users commute time
           dispatch(updateHomeCoords(latlng)); // Once updated server - store data locally (Home Coordinates)
         });

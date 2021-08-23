@@ -6,7 +6,7 @@ import { bulkUpdateSelected, updateScreen, time } from "../actions";
 const Login = () => {
   const dispatch = useDispatch();
 
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister, setIsRegister] = useState(false); // If register is false show login screen else register screen
 
   const [usernameReg, setUsernameReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
@@ -87,60 +87,77 @@ const Login = () => {
   return (
     <div className="App">
       {!isRegister ? (
-        <form className="login">
+        <form className="loginReg">
           {/* === LOGIN ==== */}
           <h1>Login</h1>
-          <label>username</label>
+          <label className="label">username</label>
           <input
+            placeholder="Username"
+            className="input"
             type="text"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
-          <label>Password</label>
+          <label className="label">Password</label>
           <input
+            placeholder="Password"
+            className="input"
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
-          <button onClick={login}>Login</button>
+          <a href="/#" className="btn" onClick={login}>
+            Login
+          </a>
           <p>{loginStatus}</p>
           <p>
             Don't have an account?{" "}
-            <span onClick={() => setIsRegister(true)}>Register Here</span>
+            <span className="boldText" onClick={() => setIsRegister(true)}>
+              Register Here
+            </span>
           </p>
         </form>
       ) : (
-        <form className="register">
+        <form className="loginReg">
           {/* === REGISTER === */}
           <h1>Register</h1>
-          <label>username</label>
+          <label className="label">username</label>
           <input
+            placeholder="Username"
+            className="input"
             type="text"
             onChange={(e) => {
               setUsernameReg(e.target.value);
             }}
           />
-          <label>email</label>
+          <label className="label">email</label>
           <input
+            placeholder="Email"
+            className="input"
             type="text"
             onChange={(e) => {
               setEmailReg(e.target.value);
             }}
           />
-          <label>Password</label>
+          <label className="label">Password</label>
           <input
+            placeholder="Password"
+            className="input"
             type="password"
             onChange={(e) => {
               setPasswordReg(e.target.value);
             }}
           />
-          <button type="submit" onClick={register}>
+          <a href="/#" className="btn" type="submit" onClick={register}>
             Register
-          </button>
+          </a>
           <p>
-            Back to <span onClick={() => setIsRegister(false)}>Login</span>
+            Back to{" "}
+            <span className="boldText" onClick={() => setIsRegister(false)}>
+              Login
+            </span>
           </p>
         </form>
       )}

@@ -215,3 +215,28 @@ body {
     }
   }
 }
+
+.loginReg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .label {
+    font-size: large;
+  }
+  .input {
+    max-width: 50%;
+    text-align: center;
+    font-size: large;
+    margin: 0.5em;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 0;
+  }
+  .btn {
+    margin: 0.8em;
+  }
+}
+
+.boldText {
+  font-weight: 600;
+}

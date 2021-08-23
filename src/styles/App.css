@@ -204,6 +204,37 @@
     background-color: #ffe057;
     color: black;
   }
+  .loginReg {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .loginReg .label {
+    font-size: large;
+  }
+  .loginReg .input {
+    max-width: 50%;
+    text-align: center;
+    font-size: large;
+    margin: 0.5em;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border-radius: 6px;
+    border: 0;
+  }
+  .loginReg .btn {
+    margin: 0.8em;
+  }
+  .boldText {
+    font-weight: 600;
+  }
 }
 
 @media (max-width: 600px) {
@@ -252,8 +283,8 @@
     width: 120px;
   }
   .btn:hover, .btn:active {
-    color: #fdf7d8;
-    background: #0c1b33;
+    color: #fdf7d8 !important;
+    background: #0c1b33 !important;
   }
 }
 
@@ -372,33 +403,6 @@
   .small {
     font-size: 12px;
   }
-  .toolBar {
-    background-color: #ffe677;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 40px;
-    position: fixed;
-    bottom: 0%;
-    width: 100%;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    right: 0%;
-  }
-  .toolBar .back {
-    position: relative;
-    border: solid black 1px;
-    width: 100%;
-    padding: 0.5em;
-  }
-  .toolBar .userOptions {
-    position: relative;
-    border: solid black 1px;
-    border-left: none;
-    width: 100%;
-    padding: 0.5em;
-  }
   /* Style the navigation menu */
   .topnav {
     background-color: #ffe677;
@@ -438,6 +442,37 @@
   .topnav a:hover {
     background-color: #ffe057;
     color: black;
+  }
+  .loginReg {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .loginReg .label {
+    font-size: large;
+  }
+  .loginReg .input {
+    max-width: 50%;
+    text-align: center;
+    font-size: large;
+    margin: 0.5em;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border-radius: 6px;
+    border: 0;
+  }
+  .loginReg .btn {
+    margin: 0.8em;
+  }
+  .boldText {
+    font-weight: 600;
   }
 }
 /*# sourceMappingURL=App.css.map */
