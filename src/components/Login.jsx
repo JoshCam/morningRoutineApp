@@ -18,6 +18,8 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
 
   const register = (e) => {
+    // Send backend new user details and refresh screen
+    // so that user gets sent to login and inputs get cleared
     e.preventDefault();
     axios
       .post("https://morning-routine-jc.herokuapp.com/register", {
@@ -32,6 +34,7 @@ const Login = () => {
   };
 
   const login = async (e) => {
+    // send backend username & password and await response
     e.preventDefault();
     const logInResults = await axios.post(
       "https://morning-routine-jc.herokuapp.com/login",
@@ -45,9 +48,10 @@ const Login = () => {
       setLoginStatus("Wrong user name or password");
     } else {
       localStorage.setItem("token", logInResults.data.token);
-      // Check if user has existing info()
       dispatch(updateScreen(0));
       // await checkIfUserInfo();
+      // If user does have existing info send them to the home screen else send them to
+      // the user Info screen to grab info
       const tasksResults = await axios.post(
         "https://morning-routine-jc.herokuapp.com/get_tasks",
         {
@@ -64,7 +68,7 @@ const Login = () => {
 
   // const checkIfUserInfo = async () => {
   //   // This is a WIP - the idea is we send the user to the home screen if we have their info
-  //   // if we dont we send them to the info screen
+  //   // if we don't we send them to the info screen
   //   let config = {
   //     headers: {
   //       token: localStorage.getItem("token"),
@@ -86,11 +90,23 @@ const Login = () => {
 
   return (
     <div className="App">
+      <div className="sunriseContainer">
+        <div className="backgroundImg"></div>
+        <div className="gradient">
+          <div className="textContainer">
+            <span className="good">GOOD</span>
+            <span className="morning">MORNING</span>
+          </div>
+        </div>
+      </div>
       {!isRegister ? (
         <form className="loginReg">
           {/* === LOGIN ==== */}
-          <h1>Login</h1>
-          <label className="label">username</label>
+          <div className="signinText">
+            <p>sign In To</p>
+            <p>Build Your Perfect Morning Routine</p>
+          </div>
+          {/* <label className="label">username</label> */}
           <input
             placeholder="Username"
             className="input"
@@ -99,7 +115,7 @@ const Login = () => {
               setUsername(e.target.value);
             }}
           />
-          <label className="label">Password</label>
+          {/* <label className="label">Password</label> */}
           <input
             placeholder="Password"
             className="input"

@@ -217,6 +217,7 @@ body {
 }
 
 .loginReg {
+  margin-top: 55.25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,12 +226,15 @@ body {
   }
   .input {
     max-width: 50%;
-    text-align: center;
+    text-align: left;
+    border: 1px solid #2d2d2d;
+    background-color: #fda43c;
     font-size: large;
     margin: 0.5em;
+    padding: 0.5em;
     box-sizing: border-box;
     border-radius: 6px;
-    border: 0;
+    // border: 0;
   }
   .btn {
     margin: 0.8em;
@@ -239,4 +243,59 @@ body {
 
 .boldText {
   font-weight: 600;
+}
+
+.sunriseContainer {
+  position: absolute;
+  overflow: hidden;
+  width: 100vw;
+  height: 55.25vh;
+  top: 0;
+  right: 0;
+}
+.backgroundImg {
+  position: absolute;
+  width: 100vw;
+  height: 55.25vh;
+  right: 0px;
+  top: 0px;
+  background: url("../images/sunrise.jpg");
+  background-size: cover;
+}
+
+.gradient {
+  position: absolute;
+  width: 100vw;
+  height: 55.25vh;
+  right: 0px;
+  top: 0px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) -1.03%,
+    #fda43c 98.97%
+  );
+}
+
+.textContainer {
+  text-align: left;
+  position: absolute;
+  width: 330px;
+  height: 84px;
+  left: 39px;
+  top: 15em;
+  .good {
+    margin-bottom: -1em;
+    font-size: 33px;
+    display: block;
+  }
+  .morning {
+    font-size: 65px;
+    display: block;
+  }
+}
+
+.signinText {
+  text-align: left;
+  max-width: 50%;
+  font-size: 11px;
 }

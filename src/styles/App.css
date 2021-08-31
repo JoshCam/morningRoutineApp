@@ -3,7 +3,7 @@
     font-family: "Poppins", sans-serif;
   }
   body {
-    background-color: #fdf7d8;
+    background-color: #fda43c;
     color: #0c1b33;
   }
   .when,
@@ -20,7 +20,7 @@
     width: 50%;
   }
   .outputBox {
-    background-color: #fdf7d8;
+    background-color: #fda43c;
     width: 100%;
     overflow: hidden;
   }
@@ -44,7 +44,7 @@
     width: 120px;
   }
   .btn:hover, .btn:active {
-    color: #fdf7d8;
+    color: #fda43c;
     background: #0c1b33;
   }
 }
@@ -242,7 +242,7 @@
     font-family: "Poppins", sans-serif;
   }
   body {
-    background-color: #fdf7d8;
+    background-color: #fda43c;
     color: #0c1b33;
   }
   .when,
@@ -259,7 +259,7 @@
     width: 50%;
   }
   .outputBox {
-    background-color: #fdf7d8;
+    background-color: #fda43c;
     width: 100%;
     overflow: hidden;
   }
@@ -283,7 +283,7 @@
     width: 120px;
   }
   .btn:hover, .btn:active {
-    color: #fdf7d8 !important;
+    color: #fda43c !important;
     background: #0c1b33 !important;
   }
 }
@@ -444,6 +444,7 @@
     color: black;
   }
   .loginReg {
+    margin-top: 55.25vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -460,19 +461,69 @@
   }
   .loginReg .input {
     max-width: 50%;
-    text-align: center;
+    text-align: left;
+    border: 1px solid #2d2d2d;
+    background-color: #fda43c;
     font-size: large;
     margin: 0.5em;
+    padding: 0.5em;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     border-radius: 6px;
-    border: 0;
   }
   .loginReg .btn {
     margin: 0.8em;
   }
   .boldText {
     font-weight: 600;
+  }
+  .sunriseContainer {
+    position: absolute;
+    overflow: hidden;
+    width: 100vw;
+    height: 55.25vh;
+    top: 0;
+    right: 0;
+  }
+  .backgroundImg {
+    position: absolute;
+    width: 100vw;
+    height: 55.25vh;
+    right: 0px;
+    top: 0px;
+    background: url("../images/sunrise.jpg");
+    background-size: cover;
+  }
+  .gradient {
+    position: absolute;
+    width: 100vw;
+    height: 55.25vh;
+    right: 0px;
+    top: 0px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(-1.03%, rgba(255, 255, 255, 0)), color-stop(98.97%, #fda43c));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) -1.03%, #fda43c 98.97%);
+  }
+  .textContainer {
+    text-align: left;
+    position: absolute;
+    width: 330px;
+    height: 84px;
+    left: 39px;
+    top: 15em;
+  }
+  .textContainer .good {
+    margin-bottom: -1em;
+    font-size: 33px;
+    display: block;
+  }
+  .textContainer .morning {
+    font-size: 65px;
+    display: block;
+  }
+  .signinText {
+    text-align: left;
+    max-width: 50%;
+    font-size: 11px;
   }
 }
 /*# sourceMappingURL=App.css.map */
