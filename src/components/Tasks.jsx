@@ -1,19 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCard from "./TaskCard";
-import { updateScreen, removeCommute } from "../actions";
+import { updateScreen } from "../actions";
 
 const Tasks = () => {
   const posTasks = useSelector((state) => state.posTasks);
   const duration = useSelector((state) => state.userInfo.duration);
   const dispatch = useDispatch();
 
-  let travelTime;
-  if (duration > 0) {
-    travelTime = duration / 60;
-  } else {
-    dispatch(removeCommute());
-  }
+  let travelTime = duration / 60;
 
   return (
     // Displays individual tasks to be selected
